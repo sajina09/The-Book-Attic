@@ -2,16 +2,21 @@ const productModel = require("../model/productModel");
 const Book = require("../model/productModel");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
+const ApiFeatures = require("../utils/apiFeatures");
 
 /* Get all product / books */
 
 exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
   let books;
-  try {
-    books = await Book.find();
-  } catch (err) {
-    console.log(`Error while getting all books : ${err}`);
-  }
+  const resultPerPage = 5;
+  const bookCounts = await Book.countDocuments();
+
+  const apiFeatures = new ApiFeatures(Book.find(), req.query)
+    .search()
+    .filter()
+    .pagination(resultPerPage);
+  books = await apiFeatures.query;
+
   if (!books) {
     return next(
       new ErrorHandler(400, "No books found", "Book finding error", null)
@@ -19,11 +24,12 @@ exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
   }
 
   res.status(200).json({
-    code: 000,
+    code: 200,
     message: "Find all books successful",
     error: null,
     data: {
       books,
+      bookCounts,
     },
   });
 });
