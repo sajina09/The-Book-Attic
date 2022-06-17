@@ -1,4 +1,3 @@
-const productModel = require("../model/productModel");
 const Book = require("../model/productModel");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
