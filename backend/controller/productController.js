@@ -36,6 +36,7 @@ exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
 /* Create a book product  */
 
 exports.createBook = catchAsyncErrors(async (req, res, next) => {
+  req.body.user = req.body.id;
   const book = await Book.create(req.body);
 
   res.status(201).json({
