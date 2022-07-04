@@ -19,7 +19,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.5",
     "nodemailer": "^6.7.5",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "react-rating-stars-component": "^2.2.0",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "validator": "^13.7.0"

@@ -1,0 +1,19 @@
+.homeHeading {
+  border-bottom: 1px solid rgba(21, 21, 21, 0.5);
+  border-right: 1px solid rgba(21, 21, 21, 0.5);
+  width: 20vmax;
+  text-align: center;
+  margin: 5vmax auto;
+}
+
+.homeHeadingText {
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1.4vmax;
+  margin-bottom: 15px;
+  border: 1px solid rgba(21, 21, 21, 0.5);
+  width: 17vmax;
+  padding: 1vmax;
+  background-color: #faeacb;
+  color: rgb(0, 0, 0, 0.7);
+}
