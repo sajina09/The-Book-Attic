@@ -3,6 +3,7 @@ import { CgMouse } from "react-icons/cg";
 import Heading from "../Heading";
 import "./Home.css";
 import ProductCard from "./product";
+import logo from "../../images/logo.png";
 
 const Home = () => {
   const products = [
@@ -50,6 +51,9 @@ const Home = () => {
   return (
     <Fragment>
       <div className="banner">
+        <div className="logo">
+          <img src={logo} alt="Logo" />
+        </div>
         <p>Welcome to The Book Attic</p>
         <h1>FIND AMAZING PRODUCTS BELOW</h1>
 

@@ -12,11 +12,18 @@
   justify-content: center;
   color: black;
 }
-
+.logo {
+  margin-top: 10px;
+  padding-bottom: 20px;
+}
+.logo > img {
+  object-fit: contain;
+  width: 250px;
+  padding-bottom: 10px;
+}
 .banner > h1 {
-  margin: 5vmax;
-
-  font: 600 2.5vmax "Roboto";
+  margin: 3vmax;
+  font: 400 2vmax "Roboto";
 }
 
 .banner > p {
@@ -96,7 +103,6 @@
 
 .productCard > span {
   margin: 0.5vmax;
-  color: rgb(134, 142, 132);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 1vmax;
 }
@@ -108,6 +114,11 @@
 }
 
 @media screen and (max-width: 600px) {
+  .logo > img {
+    object-fit: contain;
+    width: 150px;
+    padding-bottom: 10px;
+  }
   .productCard > p {
     font-size: 1.7vmax;
   }
