@@ -63,6 +63,8 @@ const Home = () => {
           </button>
         </a>
       </div>
+
+      {/* <BookButton name="Add to cart" /> */}
       <Heading heading="Featured " />
       <div className="container" id="container">
         {products &&

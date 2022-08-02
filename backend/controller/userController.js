@@ -57,7 +57,7 @@ exports.logoutUser = catchAsyncError(async (req, res, next) => {
 });
 
 /* Forgot Password */
-exports.ForgotPassword = catchAsyncError(async (req, res, next) => {
+exports.forgotPassword = catchAsyncError(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
@@ -77,7 +77,7 @@ exports.ForgotPassword = catchAsyncError(async (req, res, next) => {
   Have a great day `;
 
   try {
-    await sendEmail({
+    await sendEmail(console.log("sendEmail"), {
       email: user.email,
       subject: `The-Book-Attic password recovery`,
       message,
@@ -92,7 +92,39 @@ exports.ForgotPassword = catchAsyncError(async (req, res, next) => {
     user.resetPasswordExpire = undefined;
 
     await user.save({ validateBeforeSave: false });
+    console.log("error catch 2");
 
-    return next(new ErrorHandler(error.message, 500));
+    return next(new ErrorHandler(message, 500));
   }
+});
+
+exports.resetPassword = catchAsyncError(async (req, res, next) => {
+  // Hashing and adding resetPasswordToken to userSchema
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetpasswordToken,
+    resetpasswordExpire: { $gt: Date.now() },
+  });
+  if (!user) {
+    return next(
+      new ErrorHandler(
+        "Reset Password Token is invalid or has been expired",
+        400
+      )
+    );
+  }
+  if (req.body.password !== req.body.confirmPassword) {
+    return next(new ErrorHandler("Password does not match", 400));
+  }
+  user.password = req.body.password;
+  user.resetPassword = undefined;
+  user.resetPasswordExpire = undefined;
+
+  await user.save();
+
+  sendToken(user, 200, res);
 });
