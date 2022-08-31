@@ -12,18 +12,19 @@ const router = express.Router();
 
 // router.route("/products").get(getAllProducts);
 
-router.get("/books", getAllBooks);
+router.get("/products", getAllBooks);
 router.post(
-  "/book/add",
+  "/admin/product/add",
   isAuthenticatedUser,
   authorizeRoles("admin"),
   createBook
 );
 
 router
-  .route("/book/:id")
+  .route("/admin/product/:id")
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateBook)
-  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteBook)
-  .get(getSingleBook);
+  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteBook);
+
+router.route("/product/:id").get(getSingleBook);
 
 module.exports = router;
