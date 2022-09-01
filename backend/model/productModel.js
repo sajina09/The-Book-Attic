@@ -21,7 +21,7 @@ const bookSchema = new Schema({
     required: [true, "Please enter the price"],
     maxLength: [5, "Price can't exceed 99,999"],
   },
-  rating: {
+  ratings: {
     type: Number,
     default: 0,
   },
