@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer/Footer";
 import Home from "./components/Home/Home";
+import DetailsPage from "./components/Details";
 
 function App() {
   useEffect(() => {
@@ -15,13 +16,16 @@ function App() {
     });
   }, []);
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <>
+      <Router>
+        <Header />
+        <Routes>
+          <Route exact path="/" element={<Home/>} />
+          <Route path="/product/:id" element={<DetailsPage />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </>
   );
 }
 

@@ -53,15 +53,19 @@ const Home = () => {
     },
   ];
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProduct());
-  }, [dispatch]);
-
   const { loading, error, productCount, products } = useSelector(
     (state) => state.products
   );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (error) {
+      return alert.error(error);
+    }
+    dispatch(getProduct());
+  }, [error, dispatch]);
+
   const productList = products?.data?.books || [];
   let productListArray = [];
   productList?.map((list) => {
