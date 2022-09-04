@@ -1,12 +1,16 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { CgMouse } from "react-icons/cg";
 import Heading from "../Heading";
 import "./Home.css";
 import ProductCard from "./product";
 import logo from "../../images/logo.png";
+import Metadata from "../layout/MetaData";
+import { getProduct } from "../../actions/ProductActions";
+import { useSelector, useDispatch } from "react-redux";
+import Loader from "../Loader/Loader";
 
 const Home = () => {
-  const products = [
+  const productsss = [
     {
       name: "Rich dad poor dad",
       images: [
@@ -48,47 +52,63 @@ const Home = () => {
       _id: "Munu",
     },
   ];
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
+
+  const { loading, error, productCount, products } = useSelector(
+    (state) => state.products
+  );
+  const productList = products?.data?.books || [];
+  let productListArray = [];
+  productList?.map((list) => {
+    return {
+      name: list.bookName,
+      // images: list.image,
+      images: [
+        {
+          url: "https://play-lh.googleusercontent.com/r-ZtHr0NkeGRLkFWcDVsLLpabGsO52PJfRM7cVIjfCP8tudJawUZ60iPXp_lhUCaeyid",
+        },
+      ],
+      price: "Rs." + list.price,
+      _id: list._id,
+    };
+  });
+
   return (
     <Fragment>
-      <div className="banner">
-        <div className="logo">
-          <img src={logo} alt="Logo" />
-        </div>
-        <p>Welcome to The Book Attic</p>
-        <h1>FIND AMAZING PRODUCTS BELOW</h1>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Metadata title="The-Book-Attic" />
+          <div className="banner">
+            <div className="logo">
+              <img src={logo} alt="Logo" />
+            </div>
+            <p>Welcome to The Book Attic</p>
+            <h1>FIND AMAZING PRODUCTS BELOW</h1>
+            <a href="#container">
+              <button>
+                Scroll <CgMouse />
+              </button>
+            </a>
+          </div>
 
-        <a href="#container">
-          <button>
-            Scroll <CgMouse />
-          </button>
-        </a>
-      </div>
-
-      {/* <BookButton name="Add to cart" /> */}
-      <Heading heading="Featured " />
-      <div className="container" id="container">
-        {products &&
-          products.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
-        {/* <ProductCard product={products} /> */}
-      </div>
-      <Heading heading="Recommended Books " />
-      <div className="container" id="container">
-        {products &&
-          products.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
-        {/* <ProductCard product={products} /> */}
-      </div>
-      <Heading heading="Borrow and Read " />
-      <div className="container" id="container">
-        {products &&
-          products.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
-        {/* <ProductCard product={products} /> */}
-      </div>
+          {/* <BookButton name="Add to cart" /> */}
+          <Heading heading="Featured " />
+          <div className="container" id="container">
+            {productList &&
+              productList.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+          </div>
+          <Heading heading="Borrow and Read " />
+        </>
+      )}
     </Fragment>
   );
 };
