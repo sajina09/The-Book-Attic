@@ -31,17 +31,20 @@ export const getProduct = () => async (dispatch) => {
   }
 };
 /* Get a single product detailed information */
-export const getProductDetails = (id) => async (dispatch) => {
+export const getProductDetails = (idParam) => async (dispatch) => {
+  console.log("API");
   try {
     dispatch({
       type: PRODUCT_DETAILS_REQUEST,
     });
-    const { data } = await axios.get(`/api/v1/product/${id}`);
+    const { data } = await axios.get(`/api/v1/product/${idParam}`);
+    console.log("dataaaaa", data);
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
       payload: data,
     });
   } catch (error) {
+    console.log("eroooror");
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
       payload: error.response.data.message,

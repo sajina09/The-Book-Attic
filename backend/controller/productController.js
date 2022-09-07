@@ -30,6 +30,7 @@ exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
     data: {
       books,
       bookCounts,
+      resultPerPage,
     },
   });
 });
