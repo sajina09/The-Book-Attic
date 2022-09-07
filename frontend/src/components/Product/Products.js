@@ -12,7 +12,38 @@ import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import Pagination from "react-js-pagination";
 import { useParams } from "react-router-dom";
+import { purple } from "@mui/material/colors";
 
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+
+const muiTheme = createMuiTheme({
+  overrides: {
+    MuiSlider: {
+      thumb: {
+        color: "#FFE162",
+      },
+      track: {
+        color: "#FFE162",
+      },
+      rail: {
+        color: "black",
+      },
+    },
+  },
+});
+
+const color = purple[300];
+
+const categories = [
+  "Horror",
+  "Adventure",
+  "Romantic",
+  "Comedy",
+  "Novel",
+  "Fiction",
+  "Biography",
+];
 const Products = ({ match }) => {
   const dispatch = useDispatch();
 
@@ -23,13 +54,12 @@ const Products = ({ match }) => {
   const [category, setCategory] = useState("");
 
   const [ratings, setRatings] = useState(0);
-  const { products, loading, error, filteredProductsCount } = useSelector(
-    (state) => state.products
-  );
+  const { products, loading, error } = useSelector((state) => state.products);
 
   const books = products?.data?.books;
   const resultPerPage = products?.data?.resultPerPage;
   const productsCount = products?.data?.bookCounts;
+  const filteredProductsCount = products?.data?.filteredProductsCount;
 
   console.log("products", products);
 
@@ -45,7 +75,7 @@ const Products = ({ match }) => {
     setPrice(newPrice);
   };
   let count = filteredProductsCount;
-
+  console.log(".count......", count);
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -55,7 +85,6 @@ const Products = ({ match }) => {
     dispatch(getProduct(keyword, currentPage, price, category, ratings));
   }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
-  const categories = [];
   return (
     <>
       {loading ? (
@@ -73,14 +102,17 @@ const Products = ({ match }) => {
           </div>
           <div className="filterBox">
             <Typography>Price</Typography>
-            <Slider
-              value={price}
-              onChange={priceHandler}
-              valueLabelDisplay="auto"
-              aria-labelledby="range-slider"
-              min={0}
-              max={25000}
-            />
+            <ThemeProvider theme={muiTheme}>
+              <Slider
+                value={price}
+                onChange={priceHandler}
+                color={color}
+                valueLabelDisplay="auto"
+                aria-labelledby="range-slider"
+                min={0}
+                max={25000}
+              />
+            </ThemeProvider>
 
             <Typography>Categories</Typography>
             <ul className="categoryBox">
@@ -109,6 +141,7 @@ const Products = ({ match }) => {
               />
             </fieldset>
           </div>
+
           {resultPerPage < count && (
             <div className="paginationBox">
               <Pagination

@@ -10,19 +10,17 @@ import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
 
 const Home = () => {
-  const { loading, error, productCount, products } = useSelector(
-    (state) => state.products
-  );
+  const { loading, products } = useSelector((state) => state.products);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
+    // if (error) {
+    //   alert.error(error);
+    //   dispatch(clearErrors());
+    // }
     dispatch(getProduct());
-  }, [error, dispatch]);
+  }, [dispatch]);
 
   const productList = products?.data?.books || [];
   let productListArray = [];
