@@ -25,6 +25,7 @@ import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import BookButton from "../Button";
 
 const ProductDetails = ({ match }) => {
+  
   const dispatch = useDispatch();
   const alert = useAlert();
   const { id } = useParams();
@@ -111,12 +112,12 @@ const ProductDetails = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title={`${product.name} -- E COMMERCE`} />
+          <MetaData title={`${productData?.bookName} -- TBA`} />
           <div className="ProductDetails">
             <div>
-              <Carousel>
-                {product.images &&
-                  product.images.map((item, i) => (
+              {/* <Carousel>
+                {productData?.image &&
+                  productData?.image.map((item, i) => (
                     <img
                       className="CarouselImage"
                       key={i}
@@ -124,7 +125,7 @@ const ProductDetails = ({ match }) => {
                       alt={`${i} Slide`}
                     />
                   ))}
-              </Carousel>
+              </Carousel> */}
             </div>
 
             <div>

@@ -11,6 +11,7 @@ const ProductCard = ({ product }) => {
     value: product.ratings,
     isHalf: true,
   };
+  console.log("product---", product);
   return (
     <Link className="productCard" to={`/product/${product?._id}`}>
       {product ? (
@@ -18,7 +19,7 @@ const ProductCard = ({ product }) => {
           <img src={product?.image[0]?.url} alt={product?.name} />
           <p>{product?.bookName}</p>
           <div>
-            <ReactStars {...options} />{" "}
+            {/* <ReactStars {...options} />{" "} */}
             <span className="productCardSpan">
               {" "}
               ({product?.numOfReviews} Reviews)

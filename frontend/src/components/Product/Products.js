@@ -14,10 +14,10 @@ import Pagination from "react-js-pagination";
 import { useParams } from "react-router-dom";
 import { purple } from "@mui/material/colors";
 
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 
-const muiTheme = createMuiTheme({
+const muiTheme = createTheme({
   overrides: {
     MuiSlider: {
       thumb: {
@@ -32,8 +32,6 @@ const muiTheme = createMuiTheme({
     },
   },
 });
-
-const color = purple[300];
 
 const categories = [
   "Horror",
@@ -63,10 +61,8 @@ const Products = ({ match }) => {
 
   console.log("products", products);
 
-  const { keyword } = useParams();
-  console.log("params", keyword);
-  // const keyword = match.params.keyword;
-
+  const keyword = match?.params?.keyword;
+  console.log("keyword", keyword);
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
   };
@@ -75,7 +71,6 @@ const Products = ({ match }) => {
     setPrice(newPrice);
   };
   let count = filteredProductsCount;
-  console.log(".count......", count);
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -106,7 +101,6 @@ const Products = ({ match }) => {
               <Slider
                 value={price}
                 onChange={priceHandler}
-                color={color}
                 valueLabelDisplay="auto"
                 aria-labelledby="range-slider"
                 min={0}
