@@ -25,7 +25,6 @@ import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import BookButton from "../Button";
 
 const ProductDetails = ({ match }) => {
-  
   const dispatch = useDispatch();
   const alert = useAlert();
   const { id } = useParams();
@@ -134,7 +133,7 @@ const ProductDetails = ({ match }) => {
                 <p>Product # {productData?._id}</p>
               </div>
               <div className="detailsBlock-2">
-                <Rating {...options} />
+                {/* <Rating {...options} /> */}
                 <span className="detailsBlock-2-span">
                   {" "}
                   ({productData?.numOfReviews} Reviews)
@@ -180,7 +179,7 @@ const ProductDetails = ({ match }) => {
 
           <h3 className="reviewsHeading">REVIEWS</h3>
 
-          <Dialog
+          {/* <Dialog
             aria-labelledby="simple-dialog-title"
             open={open}
             onClose={submitReviewToggle}
@@ -209,7 +208,7 @@ const ProductDetails = ({ match }) => {
                 Submit
               </Button>
             </DialogActions>
-          </Dialog>
+          </Dialog> */}
 
           {product.reviews && product.reviews[0] ? (
             <div className="reviews">
