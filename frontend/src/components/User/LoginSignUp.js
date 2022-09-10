@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 
-const LoginSignUp = () => {
+const LoginSignUp = (history) => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const history = useNavigate();
@@ -77,7 +77,7 @@ const LoginSignUp = () => {
       dispatch(clearErrors());
     }
     if (isAuthenticated) {
-      history("/account");
+      history.push("/account");
     }
   }, [dispatch, error, alert, isAuthenticated, history]);
 

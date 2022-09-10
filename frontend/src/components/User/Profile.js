@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Metadata from '../layout/MetaData'
 import Loader from '../Loader/Loader'
+import "./Profile.css"
 
 const Profile = ({history}) => {
 
