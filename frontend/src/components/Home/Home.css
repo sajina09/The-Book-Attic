@@ -113,6 +113,28 @@
   transform: translateY(-1vmax);
 }
 
+.see-all-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.see-all-container > div > button {
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: all 0.5s;
+  background-color: #dea639;
+  font: 500 0.7vmax "Roboto";
+  border-radius: 20px;
+  padding: 0.5vmax 2vmax;
+  margin: 1vmax;
+  margin-left: -70px;
+  outline: none;
+}
+.see-all-container > div > button:hover {
+  background-color: rgb(105, 131, 101);
+}
+
 @media screen and (max-width: 600px) {
   .logo > img {
     object-fit: contain;

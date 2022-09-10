@@ -8,6 +8,7 @@ import Metadata from "../layout/MetaData";
 import { clearErrors, getProduct } from "../../actions/ProductActions";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
+import ProductBlock from "./ProductBlock";
 
 const Home = () => {
   const { loading, products } = useSelector((state) => state.products);
@@ -23,6 +24,22 @@ const Home = () => {
   }, [dispatch]);
 
   const productList = products?.data?.books || [];
+
+  const slicedList = productList.splice(5, 4);
+
+  //Filtering books
+  const nepaliBookList = productList?.filter((item) => {
+    return item.language === "Nepali";
+  });
+
+  const translatedBookList = productList?.filter((item) => {
+    return item.isTranslatedBook === true;
+  });
+
+  const secondHandBookList = productList?.filter((item) => {
+    return item.isSecondHand === true;
+  });
+
   let productListArray = [];
   productList?.map((list) => {
     return {
@@ -60,13 +77,24 @@ const Home = () => {
 
           {/* <BookButton name="Add to cart" /> */}
           <Heading heading="Featured " />
-          <div className="container" id="container">
+          {/* <div className="container" id="container">
             {productList &&
               productList.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
-          </div>
-          <Heading heading="Borrow and Read " />
+          </div> */}
+
+          {/* <Heading heading="Borrow and Read " /> */}
+          <ProductBlock productList={slicedList} />
+
+          <Heading heading="Nepali Books" />
+          <ProductBlock productList={nepaliBookList} />
+
+          <Heading heading="Translated books " />
+          <ProductBlock productList={translatedBookList} />
+
+          <Heading heading="Second Hand books " />
+          <ProductBlock productList={secondHandBookList} />
         </>
       )}
     </Fragment>

@@ -7,7 +7,7 @@ const Product = require("../model/productModel");
 /* Get all product / books */
 
 exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
-  const resultPerPage = 8;
+  const resultPerPage = 20;
   const bookCounts = await Book.countDocuments();
 
   const apiFeatures = new ApiFeatures(Book.find(), req.query)

@@ -37,6 +37,25 @@ const bookSchema = new Schema({
       },
     },
   ],
+  isSecondHand: {
+    type: Boolean,
+  },
+  genre: {
+    type: String,
+  },
+  ISBN: {
+    type: String,
+  },
+  page: {
+    type: Number,
+  },
+  language: {
+    type: String,
+  },
+  isTranslatedBook: {
+    type: Boolean,
+  },
+
   category: {
     type: String,
     required: [true, "Please enter a category"],

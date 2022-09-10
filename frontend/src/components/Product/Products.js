@@ -60,8 +60,6 @@ const Products = ({ match }) => {
   const productsCount = products?.data?.bookCounts;
   const filteredProductsCount = products?.data?.filteredProductsCount;
 
-  console.log("products", products);
-
   const keyword = match?.params?.keyword;
   console.log("keyword", keyword);
   const setCurrentPageNo = (e) => {
@@ -81,6 +79,8 @@ const Products = ({ match }) => {
     dispatch(getProduct(keyword, currentPage, price, category, ratings));
   }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
+  console.log("resultPerPage", resultPerPage);
+  console.log(" count", productsCount);
   return (
     <>
       {loading ? (
@@ -137,7 +137,7 @@ const Products = ({ match }) => {
             </fieldset>
           </div>
 
-          {resultPerPage < count && (
+          {resultPerPage < productsCount && (
             <div className="paginationBox">
               <Pagination
                 activePage={currentPage}
