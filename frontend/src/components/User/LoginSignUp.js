@@ -1,20 +1,25 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import "./LoginSignUp.css";
 import Loader from "../Loader/Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
 
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors,login } from "../../actions/userAction";
+import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 
 const LoginSignUp = () => {
-  const dispatch =useDispatch();
+  const dispatch = useDispatch();
   const alert = useAlert();
+  const history = useNavigate();
 
-  const {error,loading,}= useSelector(state => state.user)
+  const { error, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
+  const apiData = useSelector((state) => state.user);
+  console.log("apiData", apiData);
 
   const loginTab = useRef(null);
   const registerTab = useRef(null);
@@ -23,67 +28,58 @@ const LoginSignUp = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const[user, setUser] =useState({
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-    name:"",
-    email:"",
-    password:"",
-  })
+  const { name, email, password } = user;
+  const [avatar, setAvatar] = useState();
+  const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
-  const{name,email,password}=user;
-  const[avatar,setAvatar]=useState();
-  const[avatarPreview,setAvatarPreview] = useState("/Profile.png");
-
-
-
-  const loginSubmit = () => {
+  const loginSubmit = (e) => {
     e.preventDefault();
-   dispatch (login(loginEmail,loginPassword))
+    dispatch(login(loginEmail, loginPassword));
   };
 
-  const registerSubmit =(e) => {
-
+  const registerSubmit = (e) => {
     e.preventDefault();
 
-    const myForm =new FormData();
+    const myForm = new FormData();
 
-    myForm.set("name",name);
-    myForm.set("email",email);
-    myForm.set("password",password);
-    myForm.set("avatar",avatar);
-    console.log("SignUp Form Submitted");
-
-
-  }
+    myForm.set("name", name);
+    myForm.set("email", email);
+    myForm.set("password", password);
+    myForm.set("avatar", avatar);
+    dispatch(register(myForm));
+  };
 
   const registerDataChange = (e) => {
+    if (e.target.name === "avatar") {
+      const reader = new FileReader();
 
-    if (e.target.name ==="avatar"){
-        const reader = new FileReader();
-        reader.onload =() =>{
-            if (reader.readyState === 2)
-            {
-                setAvatarPreview(reader.result);
-                setAvatar(reader.result);
-            }
-        };
-        reader.readAsDataURL (e.target.files[0]);
-        
-    }
-    else{
-        setUser({...user,[e.target.name]:e.target.value});
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setAvatarPreview(reader.result);
+          setAvatar(reader.result);
+        }
+      };
+
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      setUser({ ...user, [e.target.name]: e.target.value });
     }
   };
-
-  useEffect(()=> {
-    if (error){
-        alert.error(error);
-        dispatch(clearErrors());
-    } 
-    
-  },[dispatch,error,alert]);
-
-
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+    if (isAuthenticated) {
+      history("/account");
+    }
+  }, [dispatch, error, alert, isAuthenticated, history]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -103,91 +99,101 @@ const LoginSignUp = () => {
   };
 
   return (
-    <Fragment>
-      <div className="LoginSignUpContainer">
-        <div className="LoginSignUpBox">
-          <div>
-            <div className="login_signUp_toggle">
-              <p onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
-              <p onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
-            </div>
-            <button ref={switcherTab}> </button>
-          </div>
-          <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
-            <div className="loginEmail">
-              {/* <MailOutlineIcon /> */}
-              <input
-                type="email"
-                placeholder="Email"
-                required
-                value={loginEmail}
-                onChange={(e) => setLoginEmail(e.target.value)}
-              />
-            </div>
-            <div className="loginPassword">
-              {/* <LockOpenIcon /> */}
-              <input
-                type="password"
-                placeholder="Password"
-                required
-                value={loginPassword}
-                onChange={(e) => setLoginPassword(e.target.value)}
-              />
-            </div>
-            <Link to="/password/forgot">Forgot Password ?</Link>
-            <input type="submit" value="Login" className="loginBtn" />
-          </form>
+    <>
+      {" "}
+      {loading ? (
+        <Loader />
+      ) : (
+        <Fragment>
+          <div className="LoginSignUpContainer">
+            <div className="LoginSignUpBox">
+              <div>
+                <div className="login_signUp_toggle">
+                  <p onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
+                  <p onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
+                </div>
+                <button ref={switcherTab}> </button>
+              </div>
+              <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
+                <div className="loginEmail">
+                  {/* <MailOutlineIcon /> */}
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    required
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                  />
+                </div>
+                <div className="loginPassword">
+                  {/* <LockOpenIcon /> */}
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    required
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                  />
+                </div>
+                <Link to="/password/forgot">Forgot Password ?</Link>
+                <input type="submit" value="Login" className="loginBtn" />
+              </form>
 
-          <form className="signUpForm" ref={registerTab}
-             encType="multipart/form-data"
-             onSubmit={registerSubmit}
-             >
-            <div className="signUpName">
-              {/* <MailOutlineIcon /> */}
-              <input
-                type="text"
-                placeholder="Name"
-                required
-                value={name}
-                onChange={registerDataChange}
-              />
+              <form
+                className="signUpForm"
+                ref={registerTab}
+                encType="multipart/form-data"
+                onSubmit={registerSubmit}
+              >
+                <div className="signUpName">
+                  {/* <MailOutlineIcon /> */}
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    required
+                    name="name"
+                    value={name}
+                    onChange={registerDataChange}
+                  />
+                </div>
+                <div className="signUpEmail">
+                  {/* <MailOutlineIcon /> */}
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    required
+                    name="email"
+                    value={email}
+                    onChange={registerDataChange}
+                  />
+                </div>
+                <div className="loginPassword">
+                  {/* <LockOpenIcon /> */}
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    required
+                    name="password"
+                    value={password}
+                    onChange={registerDataChange}
+                  />
+                </div>
+                <div id="registerImage">
+                  <img src={avatarPreview} alt="Avatar Preview" />
+                  <input
+                    type="file"
+                    name="avatar"
+                    accept="image/*"
+                    onChange={registerDataChange}
+                  />
+                </div>
+                <input type="submit" value="Register" className="signUpBtn" />
+              </form>
             </div>
-            <div className="signUpEmail">
-              {/* <MailOutlineIcon /> */}
-              <input
-                type="email"
-                placeholder="Email"
-                required
-                name="email"
-                value={email}
-                onChange={registerDataChange}
-              />
-            </div>
-            <div className="loginPassword">
-              {/* <LockOpenIcon /> */}
-              <input
-                type="password"
-                placeholder="Password"
-                required
-                name="password"
-                value={password}
-                onChange={registerDataChange}
-              />
-            </div>
-            <div id="registerImage">
-                <img src ={avatarPreview} alt="Avatar Preview"/>
-                <input 
-                type="file"
-                name="avatar"
-                accept="image/*"
-                onChange={registerDataChange}
-                />
-            </div>
-            <input type="submit" value="Register" className="signUpBtn"  />
-          </form>
-        </div>
-      </div>
-    </Fragment>
+          </div>
+        </Fragment>
+      )}
+    </>
   );
 };
 

@@ -14,24 +14,24 @@ import Pagination from "react-js-pagination";
 import { useParams } from "react-router-dom";
 import { purple } from "@mui/material/colors";
 
-import { createTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
+// import { createTheme } from "@material-ui/core/styles";
+// import { ThemeProvider } from "@material-ui/styles";
 
-const muiTheme = createTheme({
-  overrides: {
-    MuiSlider: {
-      thumb: {
-        color: "#FFE162",
-      },
-      track: {
-        color: "#FFE162",
-      },
-      rail: {
-        color: "black",
-      },
-    },
-  },
-});
+// const muiTheme = createTheme({
+//   overrides: {
+//     MuiSlider: {
+//       thumb: {
+//         color: "#FFE162",
+//       },
+//       track: {
+//         color: "#FFE162",
+//       },
+//       rail: {
+//         color: "black",
+//       },
+//     },
+//   },
+// });
 
 const categories = [
   "Horror",
@@ -96,8 +96,8 @@ const Products = ({ match }) => {
               ))}
           </div>
           <div className="filterBox">
-            <Typography>Price</Typography>
-            <ThemeProvider theme={muiTheme}>
+            {/* <Typography>Price</Typography> */}
+            {/* <ThemeProvider theme={muiTheme}>
               <Slider
                 value={price}
                 onChange={priceHandler}
@@ -106,9 +106,9 @@ const Products = ({ match }) => {
                 min={0}
                 max={25000}
               />
-            </ThemeProvider>
+            </ThemeProvider> */}
 
-            <Typography>Categories</Typography>
+            {/* <Typography>Categories</Typography>  */}
             <ul className="categoryBox">
               {categories.map((category) => (
                 <li
@@ -122,8 +122,8 @@ const Products = ({ match }) => {
             </ul>
 
             <fieldset>
-              <Typography component="legend">Ratings Above</Typography>
-              <Slider
+              {/* <Typography component="legend">Ratings Above</Typography> */}
+              {/* <Slider
                 value={ratings}
                 onChange={(e, newRating) => {
                   setRatings(newRating);
@@ -132,7 +132,7 @@ const Products = ({ match }) => {
                 valueLabelDisplay="auto"
                 min={0}
                 max={5}
-              />
+              /> */}
             </fieldset>
           </div>
 
