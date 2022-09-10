@@ -97,16 +97,16 @@ const Products = ({ match }) => {
               ))}
           </div>
           <div className="filterBox">
-            <Typography>Price</Typography>
+            {/* <Typography>Price</Typography> */}
             {/* <ThemeProvider theme={muiTheme}> */}
-            <Slider
+            {/* <Slider
               value={price}
               onChange={priceHandler}
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
               min={0}
               max={25000}
-            />
+            /> */}
             {/* </ThemeProvider>  */}
 
             {/* <Typography>Categories</Typography>  */}
@@ -123,8 +123,8 @@ const Products = ({ match }) => {
             </ul>
 
             <fieldset>
-              <Typography component="legend">Ratings Above</Typography>
-              <Slider
+              {/* <Typography component="legend">Ratings Above</Typography> */}
+              {/* <Slider
                 value={ratings}
                 onChange={(e, newRating) => {
                   setRatings(newRating);
@@ -133,7 +133,7 @@ const Products = ({ match }) => {
                 valueLabelDisplay="auto"
                 min={0}
                 max={5}
-              />
+              /> */}
             </fieldset>
           </div>
 
