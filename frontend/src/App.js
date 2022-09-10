@@ -13,7 +13,7 @@ import store from "./store";
 import { loadUser } from "./actions/userAction";
 import { useSelector } from "react-redux";
 import UserOptions from "./components/Heading/UserOptions";
-import Profile from "./components/User/Profile"
+import Profile from "./components/User/Profile";
 import ProtectedRoute from "./components/Route/ProtectedRoute";
 import UpdateProfile from "./components/User/UpdateProfile"
 function App() {
@@ -39,8 +39,13 @@ function App() {
           <Route exact path="/products/:keyword" element={<Products />} />
 
           <Route exact path="/search" element={<Search />} />
+<<<<<<< HEAD
           <Route exact path="/account" element={<Profile />} />
           <Route exact path="/me/update" element={<UpdateProfile />} />
+=======
+
+          <Route exact path="/account" element={<Profile />} />
+>>>>>>> 9d1ca120b4e01253ff4cc7d09de46161ff9cfca9
 
           <Route exact path="/login" element={<LoginSignUp />} />
         </Routes>
