@@ -22,7 +22,7 @@ import {
 } from "@mui/material";
 import Rating from "@mui/material/Rating";
 
-import { NEW_REVIEW_RESET } from "../../constants/ProductConstants";
+import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import BookButton from "../Button";
 
 const ProductDetails = ({ match }) => {
@@ -214,10 +214,10 @@ const ProductDetails = ({ match }) => {
               </Button>
             </DialogActions>
           </Dialog>{" "} */}
-          {product.reviews && product.reviews[0] ? (
+          {productData?.reviews && productData?.reviews[0] ? (
             <div className="reviews">
-              {product.reviews &&
-                product.reviews.map((review) => (
+              {productData?.reviews &&
+                productData?.reviews.map((review) => (
                   <ReviewCard key={review._id} review={review} />
                 ))}
             </div>
