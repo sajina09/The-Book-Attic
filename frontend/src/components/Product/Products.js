@@ -8,11 +8,12 @@ import { useEffect } from "react";
 import Metadata from "../layout/MetaData";
 import { useAlert } from "react-alert";
 import { useState } from "react";
-import Typography from "@material-ui/core/Typography";
-import Slider from "@material-ui/core/Slider";
+import { Typography } from "@mui/material";
+// import Slider from "@material-ui/core/Slider";
+import Slider from "@mui/material/Slider";
+
 import Pagination from "react-js-pagination";
 import { useParams } from "react-router-dom";
-import { purple } from "@mui/material/colors";
 
 // import { createTheme } from "@material-ui/core/styles";
 // import { ThemeProvider } from "@material-ui/styles";
@@ -96,17 +97,17 @@ const Products = ({ match }) => {
               ))}
           </div>
           <div className="filterBox">
-            {/* <Typography>Price</Typography> */}
-            {/* <ThemeProvider theme={muiTheme}>
-              <Slider
-                value={price}
-                onChange={priceHandler}
-                valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
-                min={0}
-                max={25000}
-              />
-            </ThemeProvider> */}
+            <Typography>Price</Typography>
+            {/* <ThemeProvider theme={muiTheme}> */}
+            <Slider
+              value={price}
+              onChange={priceHandler}
+              valueLabelDisplay="auto"
+              aria-labelledby="range-slider"
+              min={0}
+              max={25000}
+            />
+            {/* </ThemeProvider>  */}
 
             {/* <Typography>Categories</Typography>  */}
             <ul className="categoryBox">
@@ -122,8 +123,8 @@ const Products = ({ match }) => {
             </ul>
 
             <fieldset>
-              {/* <Typography component="legend">Ratings Above</Typography> */}
-              {/* <Slider
+              <Typography component="legend">Ratings Above</Typography>
+              <Slider
                 value={ratings}
                 onChange={(e, newRating) => {
                   setRatings(newRating);
@@ -132,7 +133,7 @@ const Products = ({ match }) => {
                 valueLabelDisplay="auto"
                 min={0}
                 max={5}
-              /> */}
+              />
             </fieldset>
           </div>
 

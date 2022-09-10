@@ -19,8 +19,9 @@ import {
   DialogContent,
   DialogTitle,
   Button,
-} from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
+} from "@mui/material";
+import Rating from "@mui/material/Rating";
+
 import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import BookButton from "../Button";
 
@@ -133,7 +134,7 @@ const ProductDetails = ({ match }) => {
                 <p>Product # {productData?._id}</p>
               </div>
               <div className="detailsBlock-2">
-                {/* <Rating {...options} /> */}
+                <Rating {...options} />
                 <span className="detailsBlock-2-span">
                   {" "}
                   ({productData?.numOfReviews} Reviews)
@@ -176,10 +177,8 @@ const ProductDetails = ({ match }) => {
               </button>
             </div>
           </div>
-
           <h3 className="reviewsHeading">REVIEWS</h3>
-
-          {/* <Dialog
+          <Dialog
             aria-labelledby="simple-dialog-title"
             open={open}
             onClose={submitReviewToggle}
@@ -208,8 +207,7 @@ const ProductDetails = ({ match }) => {
                 Submit
               </Button>
             </DialogActions>
-          </Dialog> */}
-
+          </Dialog>{" "}
           {product.reviews && product.reviews[0] ? (
             <div className="reviews">
               {product.reviews &&
