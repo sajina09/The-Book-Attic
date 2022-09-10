@@ -21,7 +21,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
-import { NEW_REVIEW_RESET } from "../../constants/ProductConstants";
+import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import BookButton from "../Button";
 
 const ProductDetails = ({ match }) => {

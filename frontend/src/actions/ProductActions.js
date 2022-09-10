@@ -10,7 +10,7 @@ import {
   NEW_REVIEW_REQUEST,
   NEW_REVIEW_SUCCESS,
   NEW_REVIEW_FAIL,
-} from "../constants/ProductConstants";
+} from "../constants/productConstants";
 
 /* Get all product */
 export const getProduct =
