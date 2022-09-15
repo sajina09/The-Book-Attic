@@ -43,6 +43,7 @@ const categories = [
   "Fiction",
   "Biography",
 ];
+
 const Products = ({ match }) => {
   const dispatch = useDispatch();
 
@@ -83,6 +84,7 @@ const Products = ({ match }) => {
   console.log(" count", productsCount);
   return (
     <>
+      {loading ? "" : ""}
       {loading ? (
         <Loader />
       ) : (

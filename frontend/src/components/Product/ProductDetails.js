@@ -52,7 +52,6 @@ const ProductDetails = ({ match }) => {
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-
   const increaseQuantity = () => {
     if (product.stock <= quantity) return;
 
@@ -196,7 +195,6 @@ const ProductDetails = ({ match }) => {
                 value={rating}
                 size="large"
               />
-
               <textarea
                 className="submitDialogTextArea"
                 cols="30"

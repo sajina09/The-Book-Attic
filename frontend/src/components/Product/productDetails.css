@@ -79,11 +79,12 @@
 
 .detailsBlock-3-1-1 > input {
   border: none;
+  margin-left: 10px;
   padding: 0.5vmax;
-  width: 1vmax;
+  width: 1.5vmax;
   text-align: center;
   outline: none;
-  font: 400 0.8vmax "Roboto";
+  font: 800 0.8vmax "Roboto";
   color: rgba(0, 0, 0, 0.74);
 }
 

@@ -88,6 +88,10 @@ const Home = () => {
           <ProductBlock productList={slicedList} />
 
           <Heading heading="Nepali Books" />
+            <ProductBlock productList={nepaliBookList} />
+            
+
+          <Heading heading="Nepali Books" />
           <ProductBlock productList={nepaliBookList} />
 
           <Heading heading="Translated books " />

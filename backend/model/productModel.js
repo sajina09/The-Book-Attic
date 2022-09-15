@@ -72,6 +72,11 @@ const bookSchema = new Schema({
   },
   reviews: [
     {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: true,
+      },
       name: {
         type: String,
         required: true,
@@ -86,10 +91,10 @@ const bookSchema = new Schema({
       },
     },
   ],
-  user: {
+  userId: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
-    // required: true,
+    required: true,
   },
   createdAt: {
     type: Date,
