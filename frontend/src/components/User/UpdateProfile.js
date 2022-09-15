@@ -23,7 +23,7 @@ const UpdateProfile = ({history}) => {
   const [avatar, setAvatar] = useState();
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
  
-  const registerSubmit = (e) => {
+  const updateProfileSubmit = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
@@ -81,8 +81,10 @@ const UpdateProfile = ({history}) => {
         <h2 className="updateProfileHeading">Update Profile</h2>
     <form
                 className="updateProfileForm"
+                /*enctype when file upload is required in HTML form.sends data in multiple parts because of large size of project */
+
                 encType="multipart/form-data"
-                onSubmit={registerSubmit}
+                onSubmit={updateProfileSubmit}
               >
                 <div className="updateProfileName">
                   {/* <MailOutlineIcon /> */}

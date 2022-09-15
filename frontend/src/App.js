@@ -16,6 +16,10 @@ import UserOptions from "./components/Heading/UserOptions";
 import Profile from "./components/User/Profile";
 import ProtectedRoute from "./components/Route/ProtectedRoute";
 import UpdateProfile from "./components/User/UpdateProfile"
+import UpdatePassword  from "./components/User/UpdatePassword";
+import ForgotPassword  from "./components/User/ForgotPassword";
+import ResetPassword from "./components/User/ResetPassword";
+
 function App() {
   const { isAuthenticatedUser, user } = useSelector((state) => state.user);
 
@@ -41,6 +45,12 @@ function App() {
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/account" element={<Profile />} />
           <Route exact path="/me/update" element={<UpdateProfile />} />
+          <Route exact path="/password/update" element={<UpdatePassword />} />
+          <Route exact path="/password/forgot" element={<ForgotPassword />} />
+          <Route exact path="/password/reset/:token" element={<ResetPassword />} />
+
+
+
 
           <Route exact path="/login" element={<LoginSignUp />} />
         </Routes>
