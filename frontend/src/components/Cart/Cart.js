@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const Cart = ({ history }) => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
-
+  console.log("cartItems", cartItems);
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -78,7 +78,7 @@ const Cart = ({ history }) => {
                       +
                     </button>
                   </div>
-                  <p className="cartSubtotal">{`₹${
+                  <p className="cartSubtotal">{`Rs.${
                     item.price * item.quantity
                   }`}</p>
                 </div>
@@ -88,7 +88,7 @@ const Cart = ({ history }) => {
               <div></div>
               <div className="cartGrossProfitBox">
                 <p>Gross Total</p>
-                <p>{`₹${cartItems.reduce(
+                <p>{`Rs.${cartItems.reduce(
                   (acc, item) => acc + item.quantity * item.price,
                   0
                 )}`}</p>
