@@ -12,7 +12,6 @@ import {
   NEW_REVIEW_FAIL,
 } from "../constants/productConstants";
 
-
 /* Get all product */
 export const getProduct =
   (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
