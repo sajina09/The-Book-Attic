@@ -48,8 +48,8 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  createdAt:{
-    type:Date,
+  createdAt: {
+    type: Date,
     default: Date.now,
   },
   resetPassword: {
