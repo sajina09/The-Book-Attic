@@ -37,6 +37,25 @@ const bookSchema = new Schema({
       },
     },
   ],
+  isSecondHand: {
+    type: Boolean,
+  },
+  genre: {
+    type: String,
+  },
+  ISBN: {
+    type: String,
+  },
+  page: {
+    type: Number,
+  },
+  language: {
+    type: String,
+  },
+  isTranslatedBook: {
+    type: Boolean,
+  },
+
   category: {
     type: String,
     required: [true, "Please enter a category"],
@@ -53,6 +72,11 @@ const bookSchema = new Schema({
   },
   reviews: [
     {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: true,
+      },
       name: {
         type: String,
         required: true,
@@ -67,10 +91,10 @@ const bookSchema = new Schema({
       },
     },
   ],
-  user: {
+  userId: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
-    // required: true,
+    required: true,
   },
   createdAt: {
     type: Date,

@@ -11,7 +11,9 @@ const ProductCard = ({ product }) => {
     value: product.ratings,
     isHalf: true,
   };
-  console.log("product---", product);
+
+  const isTranslatedBook = product?.isTranslatedBook;
+
   return (
     <Link className="productCard" to={`/product/${product?._id}`}>
       {product ? (
@@ -26,6 +28,11 @@ const ProductCard = ({ product }) => {
             </span>
           </div>
           <span>{`Rs.${product?.price}`}</span>
+          {isTranslatedBook ? (
+            <span>{`Language : ${product?.language}`}</span>
+          ) : (
+            ""
+          )}
         </>
       ) : (
         ""

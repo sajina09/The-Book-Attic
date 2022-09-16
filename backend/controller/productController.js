@@ -7,7 +7,7 @@ const Product = require("../model/productModel");
 /* Get all product / books */
 
 exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
-  const resultPerPage = 8;
+  const resultPerPage = 20;
   const bookCounts = await Book.countDocuments();
 
   const apiFeatures = new ApiFeatures(Book.find(), req.query)
@@ -138,14 +138,16 @@ exports.getSingleBook = catchAsyncErrors(async (req, res, next) => {
 /* Create or Update Review */
 exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   const { rating, comment, productId } = req.body;
+
   const review = {
-    user: req.user.id,
+    user: req.user._id,
     name: req.user.name,
     rating: Number(rating),
     comment,
   };
 
   const product = await Product.findById(productId);
+
   const isReviewed = product.reviews.find(
     (r) => r.user.toString() === req.user.id.toString()
   );

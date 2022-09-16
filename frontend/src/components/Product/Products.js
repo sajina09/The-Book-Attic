@@ -43,6 +43,7 @@ const categories = [
   "Fiction",
   "Biography",
 ];
+
 const Products = ({ match }) => {
   const dispatch = useDispatch();
 
@@ -59,8 +60,6 @@ const Products = ({ match }) => {
   const resultPerPage = products?.data?.resultPerPage;
   const productsCount = products?.data?.bookCounts;
   const filteredProductsCount = products?.data?.filteredProductsCount;
-
-  console.log("products", products);
 
   const keyword = match?.params?.keyword;
   console.log("keyword", keyword);
@@ -81,8 +80,11 @@ const Products = ({ match }) => {
     dispatch(getProduct(keyword, currentPage, price, category, ratings));
   }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
+  console.log("resultPerPage", resultPerPage);
+  console.log(" count", productsCount);
   return (
     <>
+      {loading ? "" : ""}
       {loading ? (
         <Loader />
       ) : (
@@ -105,8 +107,8 @@ const Products = ({ match }) => {
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
               min={0}
-              max={25000}
-            /> */}
+              max={5000}
+            />
             {/* </ThemeProvider>  */}
 
             {/* <Typography>Categories</Typography>  */}
@@ -137,7 +139,7 @@ const Products = ({ match }) => {
             </fieldset>
           </div>
 
-          {resultPerPage < count && (
+          {resultPerPage < productsCount && (
             <div className="paginationBox">
               <Pagination
                 activePage={currentPage}

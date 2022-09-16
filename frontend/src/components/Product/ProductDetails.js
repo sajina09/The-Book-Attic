@@ -52,7 +52,6 @@ const ProductDetails = ({ match }) => {
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-
   const increaseQuantity = () => {
     if (product.stock <= quantity) return;
 
@@ -115,6 +114,12 @@ const ProductDetails = ({ match }) => {
           <MetaData title={`${productData?.bookName} -- TBA`} />
           <div className="ProductDetails">
             <div>
+              <img
+                className="CarouselImage"
+                src={productData?.image[0].url}
+                alt={`Slide`}
+              />
+
               {/* <Carousel>
                 {productData?.image &&
                   productData?.image.map((item, i) => (
@@ -190,7 +195,6 @@ const ProductDetails = ({ match }) => {
                 value={rating}
                 size="large"
               />
-
               <textarea
                 className="submitDialogTextArea"
                 cols="30"
@@ -208,10 +212,10 @@ const ProductDetails = ({ match }) => {
               </Button>
             </DialogActions>
           </Dialog>{" "} */}
-          {product.reviews && product.reviews[0] ? (
+          {productData?.reviews && productData?.reviews[0] ? (
             <div className="reviews">
-              {product.reviews &&
-                product.reviews.map((review) => (
+              {productData?.reviews &&
+                productData?.reviews.map((review) => (
                   <ReviewCard key={review._id} review={review} />
                 ))}
             </div>
