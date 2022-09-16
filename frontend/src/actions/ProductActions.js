@@ -21,7 +21,7 @@ export const getProduct =
         type: ALL_PRODUCT_REQUEST,
       });
       // const { data } = await axios.get("/api/v1/products");
-
+      console.log("keyword ---- ", keyword);
       let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
       if (category) {
@@ -42,13 +42,12 @@ export const getProduct =
   };
 /* Get a single product detailed information */
 export const getProductDetails = (idParam) => async (dispatch) => {
-  console.log("API");
   try {
     dispatch({
       type: PRODUCT_DETAILS_REQUEST,
     });
     const { data } = await axios.get(`/api/v1/product/${idParam}`);
-    console.log("dataaaaa", data);
+
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
       payload: data,

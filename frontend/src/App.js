@@ -15,14 +15,16 @@ import { useSelector } from "react-redux";
 import UserOptions from "./components/Heading/UserOptions";
 import Profile from "./components/User/Profile";
 import ProtectedRoute from "./components/Route/ProtectedRoute";
-import UpdateProfile from "./components/User/UpdateProfile"
-import UpdatePassword  from "./components/User/UpdatePassword";
-import ForgotPassword  from "./components/User/ForgotPassword";
+import UpdateProfile from "./components/User/UpdateProfile";
+import UpdatePassword from "./components/User/UpdatePassword";
+import ForgotPassword from "./components/User/ForgotPassword";
 import ResetPassword from "./components/User/ResetPassword";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   const { isAuthenticatedUser, user } = useSelector((state) => state.user);
-
+  const { state } = useSelector((state) => state);
+  console.log("state", state);
   useEffect(() => {
     WebFont.load({
       google: {
@@ -31,6 +33,7 @@ function App() {
     });
     store.dispatch(loadUser);
   }, []);
+  console.log("isAuthenticatedUser", isAuthenticatedUser);
   return (
     <>
       {isAuthenticatedUser && <UserOptions user={user} />}
@@ -40,19 +43,23 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/products" element={<Products />} />
           <Route path="/product/:id" element={<DetailsPage />} />
-          <Route exact path="/products/:keyword" element={<Products />} />
+          <Route path="/products/:keyword" element={<Products />} />
 
           <Route exact path="/search" element={<Search />} />
+          {/* <ProtectedRoute exact path="/account" component={Profile} /> */}
+
           <Route exact path="/account" element={<Profile />} />
           <Route exact path="/me/update" element={<UpdateProfile />} />
           <Route exact path="/password/update" element={<UpdatePassword />} />
           <Route exact path="/password/forgot" element={<ForgotPassword />} />
-          <Route exact path="/password/reset/:token" element={<ResetPassword />} />
-
-
-
+          <Route
+            exact
+            path="/password/reset/:token"
+            element={<ResetPassword />}
+          />
 
           <Route exact path="/login" element={<LoginSignUp />} />
+          <Route exact path="/cart" element={<Cart />} />
         </Routes>
         <Footer />
       </Router>

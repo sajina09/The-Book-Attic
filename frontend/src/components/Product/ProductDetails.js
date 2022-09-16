@@ -25,7 +25,7 @@ import Rating from "@mui/material/Rating";
 import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import BookButton from "../Button";
 
-const ProductDetails = ({ match }) => {
+const ProductDetails = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const { id } = useParams();
@@ -35,7 +35,10 @@ const ProductDetails = ({ match }) => {
   );
 
   const productData = product?.data?.book;
-  console.log("productData ----- ", productData);
+
+  const { cartItems } = useSelector((state) => state.productDetails);
+
+  console.log("cartItems", cartItems);
 
   // const { success, error: reviewError } = useSelector(
   //   (state) => state.newReview
@@ -73,6 +76,13 @@ const ProductDetails = ({ match }) => {
 
   const submitReviewToggle = () => {
     open ? setOpen(false) : setOpen(true);
+  };
+  console.log(" id in add to cart ", id);
+
+  const addToCartHandler = () => {
+    dispatch(addItemsToCart(id, quantity));
+    alert.success("Item added to cart");
+    console.log("cartItems ====== ", cartItems);
   };
 
   const reviewSubmitHandler = () => {
@@ -155,7 +165,7 @@ const ProductDetails = ({ match }) => {
                   </div>
                   <button
                     disabled={productData?.stock < 1 ? true : false}
-                    // onClick={addToCartHandler}
+                    onClick={addToCartHandler}
                   >
                     Add to Cart
                   </button>

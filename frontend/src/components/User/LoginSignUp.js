@@ -19,7 +19,6 @@ const LoginSignUp = () => {
     (state) => state.user
   );
   const apiData = useSelector((state) => state.user);
-  console.log("apiData", apiData);
 
   const loginTab = useRef(null);
   const registerTab = useRef(null);

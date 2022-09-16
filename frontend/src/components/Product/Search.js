@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import "./search.css";
 
-const Search = ({ history }) => {
+const Search = () => {
   const [keyword, setKeyword] = useState("");
-  // const history = useNavigate();
+  const history = useNavigate();
 
   const searchSubmitHandler = (e) => {
-    console.log("THe search component");
+    
     e.preventDefault();
     if (keyword.trim()) {
       console.log("THe search ------", keyword);
