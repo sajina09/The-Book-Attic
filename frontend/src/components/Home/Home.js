@@ -9,11 +9,13 @@ import { clearErrors, getProduct } from "../../actions/ProductActions";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
 import ProductBlock from "./ProductBlock";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { loading, products } = useSelector((state) => state.products);
 
   const dispatch = useDispatch();
+  const history = useNavigate();
 
   useEffect(() => {
     // if (error) {
@@ -23,8 +25,8 @@ const Home = () => {
     dispatch(getProduct());
   }, [dispatch]);
 
-  const productList = products?.data?.books || [];
-
+  const productList = products?.data?.test || [];
+  console.log("productList", products?.data?.test);
   const slicedList = productList.splice(5, 4);
 
   //Filtering books
@@ -55,6 +57,10 @@ const Home = () => {
     };
   });
 
+  const toCart = () => {
+    history("/cart");
+  };
+
   return (
     <Fragment>
       {loading ? (
@@ -74,8 +80,8 @@ const Home = () => {
               </button>
             </a>
           </div>
+          <button onClick={toCart}>Cart</button>
 
-          {/* <BookButton name="Add to cart" /> */}
           <Heading heading="Featured " />
           {/* <div className="container" id="container">
             {productList &&
@@ -88,8 +94,7 @@ const Home = () => {
           <ProductBlock productList={slicedList} />
 
           <Heading heading="Nepali Books" />
-            <ProductBlock productList={nepaliBookList} />
-            
+          <ProductBlock productList={nepaliBookList} />
 
           <Heading heading="Nepali Books" />
           <ProductBlock productList={nepaliBookList} />

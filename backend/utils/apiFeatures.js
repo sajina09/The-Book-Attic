@@ -5,8 +5,10 @@ class ApiFeatures {
 
     // search by word keyword = "John Green"
     this.queryStr = queryStr;
-  }
 
+    // console.log("query", query);
+    // console.log("queryStr", queryStr);
+  }
   search() {
     const keyword = this.queryStr.keyword
       ? {
