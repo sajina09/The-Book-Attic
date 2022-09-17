@@ -1,0 +1,25 @@
+version: "3"
+services:
+  collaborative-recommend-server:
+    build:
+      context: ./collaborative_api
+    image: collab-recommend-server
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/collab-recommend-django
+    command: python manage.py runserver 0.0.0.0:8000
+
+  popular-recommend-server:
+    build:
+      context: ./popular_api/
+    image: popular-recommend-server
+    ports:
+      - "8001:8000"
+    volumes:
+      - .:/popular-recommend-django
+    command: python manage.py runserver 0.0.0.0:8000
+
+volumes:
+  collab-recommend-django:
+  popular-recommend-django:
