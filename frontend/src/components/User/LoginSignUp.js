@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 
-const LoginSignUp = () => {
+const LoginSignUp = (location) => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const history = useNavigate();
@@ -70,15 +70,19 @@ const LoginSignUp = () => {
       setUser({ ...user, [e.target.name]: e.target.value });
     }
   };
+
+  const redirect = location.search ? location.search.split("=")[1]:"/account";
+
+
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
     if (isAuthenticated) {
-      history("/account");
+      history.push(redirect);
     }
-  }, [dispatch, error, alert, isAuthenticated, history]);
+  }, [dispatch, error, alert, isAuthenticated, history, redirect]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
