@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
   };
 
   const isTranslatedBook = product?.isTranslatedBook;
-
+  console.log("product", product?.bookName);
   return (
     <Link className="productCard" to={`/product/${product?._id}`}>
       {product ? (

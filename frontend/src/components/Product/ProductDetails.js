@@ -126,7 +126,7 @@ const ProductDetails = () => {
             <div>
               <img
                 className="CarouselImage"
-                src={productData?.image[0].url}
+                src={productData?.image}
                 alt={`Slide`}
               />
 

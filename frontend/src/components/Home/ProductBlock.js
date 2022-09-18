@@ -5,6 +5,7 @@ import "./Home.css";
 
 const ProductBlock = ({ productList }) => {
   const history = useNavigate();
+
   const handleClick = () => {
     history("/products");
   };

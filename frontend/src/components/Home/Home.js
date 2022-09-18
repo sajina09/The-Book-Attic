@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
 import ProductBlock from "./ProductBlock";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 const Home = () => {
   const { loading, products } = useSelector((state) => state.products);
@@ -17,16 +19,29 @@ const Home = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
 
+  const [mostPopularBooks, setMostPopularBooks] = useState([]);
+
+  const getMostPopularBooks = async () => {
+    console.log(" API From PYTHON", products);
+
+    const { data } = await axios.post("http://localhost:8001/upload/");
+    
+    setMostPopularBooks(data);
+  };
   useEffect(() => {
     // if (error) {
     //   alert.error(error);
     //   dispatch(clearErrors());
     // }
+    getMostPopularBooks();
     dispatch(getProduct());
   }, [dispatch]);
 
+  console.log(" API From PYTHON", mostPopularBooks);
+
   const productList = products?.data?.test || [];
-  console.log("productList", products?.data?.test);
+  // console.log("productList", products?.data?.test);
+
   const slicedList = productList.splice(5, 4);
 
   //Filtering books
@@ -82,16 +97,8 @@ const Home = () => {
           </div>
           <button onClick={toCart}>Cart</button>
 
-          <Heading heading="Featured " />
-          {/* <div className="container" id="container">
-            {productList &&
-              productList.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))}
-          </div> */}
-
-          {/* <Heading heading="Borrow and Read " /> */}
-          <ProductBlock productList={slicedList} />
+          {/* <Heading heading="Most Popular " /> */}
+          {/* <ProductBlock productList={mostPopularBooks} /> */}
 
           <Heading heading="Nepali Books" />
           <ProductBlock productList={nepaliBookList} />
