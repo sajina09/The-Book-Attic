@@ -15,24 +15,23 @@ import Slider from "@mui/material/Slider";
 import Pagination from "react-js-pagination";
 import { useParams } from "react-router-dom";
 
-// import { createTheme } from "@material-ui/core/styles";
-// import { ThemeProvider } from "@material-ui/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-// const muiTheme = createTheme({
-//   overrides: {
-//     MuiSlider: {
-//       thumb: {
-//         color: "#FFE162",
-//       },
-//       track: {
-//         color: "#FFE162",
-//       },
-//       rail: {
-//         color: "black",
-//       },
-//     },
-//   },
-// });
+const muiTheme = createTheme({
+  overrides: {
+    MuiSlider: {
+      thumb: {
+        color: "#FFE162",
+      },
+      track: {
+        color: "#FFE162",
+      },
+      rail: {
+        color: "black",
+      },
+    },
+  },
+});
 
 const categories = [
   "Horror",
@@ -97,9 +96,9 @@ const Products = ({ match }) => {
               ))}
           </div>
           <div className="filterBox">
+            <ThemeProvider theme={muiTheme}>
             {/* <Typography>Price</Typography> */}
-            {/* <ThemeProvider theme={muiTheme}> */}
-            {/* <Slider
+            <Slider
               value={price}
               onChange={priceHandler}
               valueLabelDisplay="auto"
@@ -107,7 +106,7 @@ const Products = ({ match }) => {
               min={0}
               max={5000}
             />
-            {/* </ThemeProvider>  */}
+            </ThemeProvider>
 
             {/* <Typography>Categories</Typography>  */}
             <ul className="categoryBox">

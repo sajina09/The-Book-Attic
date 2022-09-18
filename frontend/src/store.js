@@ -9,7 +9,7 @@ import {
   productReviewsReducer,
   productsReducer,
   reviewReducer,
-} from "./reducers/productReducers";
+} from "./reducers/ProductReducers";
 
 import {
   // allUsersReducer,

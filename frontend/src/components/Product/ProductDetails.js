@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Carousel from "react-material-ui-carousel";
+// import Carousel from "react-material-ui-carousel";
 import "./productDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -13,17 +13,17 @@ import Loader from "../Loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
 import { addItemsToCart } from "../../actions/CartActions";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Button,
-} from "@mui/material";
-import Rating from "@mui/material/Rating";
+// import {
+//   Dialog,
+//   DialogActions,
+//   DialogContent,
+//   DialogTitle,
+//   Button,
+// } from "@mui/material";
+// import Rating from "@mui/material/Rating";
 
-import { NEW_REVIEW_RESET } from "../../constants/productConstants";
-import BookButton from "../Button";
+// import { NEW_REVIEW_RESET } from "../../constants/ProductConstants";
+// import BookButton from "../Button";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();

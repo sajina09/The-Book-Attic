@@ -23,7 +23,7 @@ import Cart from "./components/Cart/Cart";
 
 function App() {
   const { isAuthenticatedUser, user } = useSelector((state) => state.user);
-  const { state } = useSelector((state) => state);
+  const { state } = useSelector((state) => state.user);
   console.log("state", state);
   useEffect(() => {
     WebFont.load({
@@ -33,6 +33,7 @@ function App() {
     });
     store.dispatch(loadUser);
   }, []);
+  
   console.log("isAuthenticatedUser", isAuthenticatedUser);
   return (
     <>
