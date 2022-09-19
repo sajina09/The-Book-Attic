@@ -9,17 +9,22 @@ import { clearErrors, getProduct } from "../../actions/ProductActions";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
 import ProductBlock from "./ProductBlock";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { loading, products } = useSelector((state) => state.products);
 
   const dispatch = useDispatch();
+  const history= useNavigate();
+  const getCart =() => {history("/cart")};
 
   useEffect(() => {
     // if (error) {
     //   alert.error(error);
     //   dispatch(clearErrors());
     // }
+
+    
     dispatch(getProduct());
   }, [dispatch]);
 
@@ -74,6 +79,9 @@ const Home = () => {
               </button>
             </a>
           </div>
+          <button onClick={getCart} >
+            Cart
+          </button>
 
           {/* <BookButton name="Add to cart" /> */}
           <Heading heading="Featured " />

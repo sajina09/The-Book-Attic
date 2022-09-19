@@ -10,7 +10,7 @@ import { useAlert } from "react-alert";
 import { useState } from "react";
 import { Typography } from "@mui/material";
 // import Slider from "@material-ui/core/Slider";
-import Slider from "@mui/material/Slider";
+// import Slider from "@mui/material/Slider";
 
 import Pagination from "react-js-pagination";
 import { useParams } from "react-router-dom";
@@ -98,14 +98,14 @@ const Products = ({ match }) => {
           <div className="filterBox">
             <ThemeProvider theme={muiTheme}>
             {/* <Typography>Price</Typography> */}
-            <Slider
+            {/* <Slider
               value={price}
               onChange={priceHandler}
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
               min={0}
               max={5000}
-            />
+            /> */}
             </ThemeProvider>
 
             {/* <Typography>Categories</Typography>  */}
