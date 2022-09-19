@@ -4,7 +4,7 @@ import { Navigate, Route } from "react-router-dom";
 
 const ProtectedRoute = ({ isAdmin, component: Component, ...rest }) => {
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
-
+  console.log("Protected routes", isAdmin);
   return (
     <Fragment>
       {loading === false && (
@@ -18,7 +18,6 @@ const ProtectedRoute = ({ isAdmin, component: Component, ...rest }) => {
             if (isAdmin === true && user.role !== "admin") {
               return <Navigate to="/login" />;
             }
-
             return <Component {...props} />;
           }}
         />

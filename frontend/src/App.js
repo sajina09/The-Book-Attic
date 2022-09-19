@@ -25,7 +25,7 @@ import Shipping from "./components/Cart/Shipping";
 
 function App() {
   const { isAuthenticatedUser, user } = useSelector((state) => state.user);
-  const { state } = useSelector((state) => state);
+  const { state } = useSelector((state) => state.user);
   console.log("state", state);
   useEffect(() => {
     WebFont.load({
@@ -35,6 +35,7 @@ function App() {
     });
     store.dispatch(loadUser);
   }, []);
+
   console.log("isAuthenticatedUser", isAuthenticatedUser);
   return (
     <>
@@ -50,7 +51,7 @@ function App() {
           <Route exact path="/search" element={<Search />} />
           {/* <ProtectedRoute exact path="/account" component={Profile} /> */}
 
-          <Route exact path="/account" element={<Profile />} />
+          {/* <Route exact path="/account" element={<Profile />} /> */}
           <Route exact path="/me/update" element={<UpdateProfile />} />
           <Route exact path="/password/update" element={<UpdatePassword />} />
           <Route exact path="/password/forgot" element={<ForgotPassword />} />
