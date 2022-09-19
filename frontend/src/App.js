@@ -22,6 +22,9 @@ import ResetPassword from "./components/User/ResetPassword";
 import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
+import Khalti from "./components/Khalti/Khalti";
+import OrderSucess from "./components/Cart/OrderSuccess";
+import MyOrders from "./components/Order/MyOrders";
 
 function App() {
   const { isAuthenticatedUser, user } = useSelector((state) => state.user);
@@ -65,6 +68,12 @@ function App() {
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/shipping" element={<Shipping/>} />
           <Route exact path="/order/confirm" element={<ConfirmOrder/>} />
+          <Route exact path="/khalti/payment" element={<Khalti/>} />
+          <Route exact path="/success" element={<OrderSucess/>} />
+          <Route exact path="/orders" element={<MyOrders/>} />
+
+
+
 
 
 
