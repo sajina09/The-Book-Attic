@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes,Switch } from "react-router-dom";
 import WebFont from "webfontloader";
 import { useEffect, useState } from "react";
 import Header from "./components/layout/Header/Header";
@@ -25,6 +25,8 @@ import ConfirmOrder from "./components/Cart/ConfirmOrder";
 import Khalti from "./components/Khalti/Khalti";
 import OrderSucess from "./components/Cart/OrderSuccess";
 import MyOrders from "./components/Order/MyOrders";
+import OrderDetails from "./components/Order/OrderDetails";
+import Dashboard from "./components/admin/Dashboard"
 
 function App() {
   const { isAuthenticatedUser, user } = useSelector((state) => state.user);
@@ -67,10 +69,19 @@ function App() {
           <Route exact path="/login" element={<LoginSignUp />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/shipping" element={<Shipping/>} />
-          <Route exact path="/order/confirm" element={<ConfirmOrder/>} />
+          
           <Route exact path="/khalti/payment" element={<Khalti/>} />
           <Route exact path="/success" element={<OrderSucess/>} />
           <Route exact path="/orders" element={<MyOrders/>} />
+
+        < Switch>
+        <Route exact path="/order/confirm" element={<ConfirmOrder/>} />
+          <Route exact path="/orders/:id" element={<OrderDetails/>} />
+          </Switch>
+          <Route exact path="/admin/dashboard" element={<Dashboard/>} />
+
+
+
 
 
 
