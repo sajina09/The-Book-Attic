@@ -13,14 +13,15 @@ import Loader from "../Loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
 import { addItemsToCart } from "../../actions/CartActions";
-// import {
-//   Dialog,
-//   DialogActions,
-//   DialogContent,
-//   DialogTitle,
-//   Button,
-// } from "@mui/material";
-// import Rating from "@mui/material/Rating";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+} from "@mui/material";
+
+import Rating from "@mui/material/Rating";
 
 // import { NEW_REVIEW_RESET } from "../../constants/ProductConstants";
 // import BookButton from "../Button";
@@ -77,7 +78,6 @@ const ProductDetails = () => {
   const submitReviewToggle = () => {
     open ? setOpen(false) : setOpen(true);
   };
-  console.log(" id in add to cart ", id);
 
   const addToCartHandler = () => {
     dispatch(addItemsToCart(id, quantity));
@@ -149,7 +149,7 @@ const ProductDetails = () => {
                 <p>Product # {productData?._id}</p>
               </div>
               <div className="detailsBlock-2">
-                {/* <Rating {...options} /> */}
+                <Rating {...options} />
                 <span className="detailsBlock-2-span">
                   {" "}
                   ({productData?.numOfReviews} Reviews)
@@ -193,7 +193,7 @@ const ProductDetails = () => {
             </div>
           </div>
           <h3 className="reviewsHeading">REVIEWS</h3>
-          {/* <Dialog
+          <Dialog
             aria-labelledby="simple-dialog-title"
             open={open}
             onClose={submitReviewToggle}
@@ -221,7 +221,7 @@ const ProductDetails = () => {
                 Submit
               </Button>
             </DialogActions>
-          </Dialog>{" "} */}
+          </Dialog>{" "}
           {productData?.reviews && productData?.reviews[0] ? (
             <div className="reviews">
               {productData?.reviews &&

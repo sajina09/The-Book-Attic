@@ -33,7 +33,7 @@ function App() {
     });
     store.dispatch(loadUser);
   }, []);
-  
+
   console.log("isAuthenticatedUser", isAuthenticatedUser);
   return (
     <>
@@ -49,7 +49,7 @@ function App() {
           <Route exact path="/search" element={<Search />} />
           {/* <ProtectedRoute exact path="/account" component={Profile} /> */}
 
-          <Route exact path="/account" element={<Profile />} />
+          {/* <Route exact path="/account" element={<Profile />} /> */}
           <Route exact path="/me/update" element={<UpdateProfile />} />
           <Route exact path="/password/update" element={<UpdatePassword />} />
           <Route exact path="/password/forgot" element={<ForgotPassword />} />
