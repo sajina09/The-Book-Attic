@@ -30,8 +30,13 @@ const CheckoutSteps = ({activeStep}) => {
         <Stepper alternativeLabel activeStep ={activeStep} style={stepStyles}>
             {steps.map((item,index) =>(
                 <Step
-                key={index}>
-                    <StepLabel
+                key={index} active={activeStep === index ? true : false}
+                completed={activeStep >= index ? true : false}
+
+                >
+                    <StepLabel style = {{
+                        color: activeStep>=index ? "#fbc490" : "black",
+                    }}
                     icon={item.icon}>
                         {item.label}
 
