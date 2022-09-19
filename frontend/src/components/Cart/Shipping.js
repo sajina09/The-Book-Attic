@@ -1,4 +1,4 @@
- import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./Shipping.css";
 import { useSelector, useDispatch } from "react-redux";
 import { saveShippingInfo } from "../../actions/CartActions";
@@ -42,7 +42,7 @@ const Shipping = ({ history }) => {
     <Fragment>
       <MetaData title="Shipping Details" />
 
-      <CheckoutSteps activeStep={0} />
+      {/* <CheckoutSteps activeStep={0} /> */}
 
       <div className="shippingContainer">
         <div className="shippingBox">

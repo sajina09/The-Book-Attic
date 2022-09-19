@@ -23,7 +23,7 @@ import {
 
 import Rating from "@mui/material/Rating";
 
-import { NEW_REVIEW_RESET } from "../../constants/ProductConstants";
+import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import BookButton from "../Button";
 
 const ProductDetails = () => {

@@ -25,7 +25,7 @@ const Home = () => {
     console.log(" API From PYTHON", products);
 
     const { data } = await axios.post("http://localhost:8001/upload/");
-    
+
     setMostPopularBooks(data);
   };
   useEffect(() => {
