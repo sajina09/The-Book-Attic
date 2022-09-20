@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes,Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import WebFont from "webfontloader";
 import { useEffect, useState } from "react";
 import Header from "./components/layout/Header/Header";
@@ -22,11 +22,21 @@ import ResetPassword from "./components/User/ResetPassword";
 import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
-import Khalti from "./components/Khalti/Khalti";
 import OrderSucess from "./components/Cart/OrderSuccess";
 import MyOrders from "./components/Order/MyOrders";
 import OrderDetails from "./components/Order/OrderDetails";
-import Dashboard from "./components/admin/Dashboard"
+ import Dashboard from "./components/Admin/Dashboard";
+import ProductList from "./components/Admin/ProductList";
+import NewProduct from "./component/Admin/NewProduct";
+import UpdateProduct from "./component/Admin/UpdateProduct";
+import OrderList from "./component/Admin/OrderList";
+import ProcessOrder from "./component/Admin/ProcessOrder";
+import UsersList from "./component/Admin/UsersList";
+import UpdateUser from "./component/Admin/UpdateUser";
+import ProductReviews from "./component/Admin/ProductReviews";
+import Contact from "./component/layout/Contact/Contact";
+import About from "./component/layout/About/About";
+import NotFound from "./component/layout/Not Found/NotFound";
 
 function App() {
   const { isAuthenticatedUser, user } = useSelector((state) => state.user);
@@ -70,15 +80,79 @@ function App() {
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/shipping" element={<Shipping/>} />
           
-          <Route exact path="/khalti/payment" element={<Khalti/>} />
+          {/* <Route exact path="/khalti/payment" element={<Khalti/>} /> */}
           <Route exact path="/success" element={<OrderSucess/>} />
           <Route exact path="/orders" element={<MyOrders/>} />
 
-        < Switch>
+        <Routes>
         <Route exact path="/order/confirm" element={<ConfirmOrder/>} />
           <Route exact path="/orders/:id" element={<OrderDetails/>} />
-          </Switch>
-          <Route exact path="/admin/dashboard" element={<Dashboard/>} />
+        </Routes>
+         
+        <Route
+          isAdmin={true}
+          exact
+          path="/admin/dashboard"
+          component={Dashboard}
+        />
+        <Route
+          exact
+          path="/admin/products"
+          isAdmin={true}
+          component={ProductList}
+        />
+        <Route
+          exact
+          path="/admin/product"
+          isAdmin={true}
+          component={NewProduct}
+        />
+
+        <Route
+          exact
+          path="/admin/product/:id"
+          isAdmin={true}
+          component={UpdateProduct}
+        />
+        <Route
+          exact
+          path="/admin/orders"
+          isAdmin={true}
+          component={OrderList}
+        />
+
+        <Route
+          exact
+          path="/admin/order/:id"
+          isAdmin={true}
+          component={ProcessOrder}
+        />
+        <Route
+          exact
+          path="/admin/users"
+          isAdmin={true}
+          component={UsersList}
+        />
+
+        <Route
+          exact
+          path="/admin/user/:id"
+          isAdmin={true}
+          component={UpdateUser}
+        />
+
+        <Route
+          exact
+          path="/admin/reviews"
+          isAdmin={true}
+          component={ProductReviews}
+        />
+
+        <Route
+          component={
+            window.location.pathname === "/process/payment" ? null : NotFound
+          }
+        />
 
 
 

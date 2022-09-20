@@ -39,6 +39,19 @@ exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+/* Get all product (ADMIN) / books */
+
+exports.getAdminBooks = catchAsyncErrors(async (req, res, next) => {
+  const bookCounts = await Book.find();
+
+
+  res.status(200).json({
+   success:true,
+   bookCounts,
+    
+  });
+});
+
 /* Create a book product  */
 
 exports.createBook = catchAsyncErrors(async (req, res, next) => {
