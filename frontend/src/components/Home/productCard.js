@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 // import { Rating } from "@material-ui/lab";
 import ReactStars from "react-rating-stars-component";
+import logo from "../../images/logo.png";
 
 const ProductCard = ({ product }) => {
   const options = {
@@ -13,12 +14,18 @@ const ProductCard = ({ product }) => {
   };
 
   const isTranslatedBook = product?.isTranslatedBook;
-
   return (
-    <Link className="productCard" to={`/product/${product?._id}`}>
+    <Link className="productCard" to={`/product/${product?.ISBN}`}>
       {product ? (
         <>
-          <img src={product?.image[0]?.url} alt={product?.name} />
+          {/* <img src={product?.image[0]?.url} alt={product?.name} /> */}
+
+          {product?.image ? (
+            <img src={product?.image} alt={product?.name} />
+          ) : (
+            <img src={logo} alt="Fallback" />
+          )}
+
           <p>{product?.bookName}</p>
           <div>
             {/* <ReactStars {...options} />{" "} */}

@@ -20,6 +20,8 @@ exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
   apiFeatures.pagination(resultPerPage);
   // books = await apiFeatures.query;
 
+  let bookFind = await Book.find();
+
   if (!books) {
     return next(
       new ErrorHandler(400, "No books found", "Book finding error", null)
@@ -32,6 +34,7 @@ exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
     error: null,
     data: {
       books,
+      bookFind,
       bookCounts,
       resultPerPage,
       filteredProductsCount,

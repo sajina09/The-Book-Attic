@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { CgMouse } from "react-icons/cg";
 import Heading from "../Heading";
 import "./Home.css";
@@ -9,21 +9,42 @@ import { clearErrors, getProduct } from "../../actions/ProductActions";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
 import ProductBlock from "./ProductBlock";
+import axios from "axios";
 
 const Home = () => {
   const { loading, products } = useSelector((state) => state.products);
 
   const dispatch = useDispatch();
 
+  const [mostPopularBooks, setMostPopularBooks] = useState();
+
+  const getMostPopularBooks = async () => {
+    const { data } = await axios.post("http://localhost:8001/upload/");
+    console.log(" API From PYTHON", data);
+
+    setMostPopularBooks(data);
+  };
+
   useEffect(() => {
     // if (error) {
     //   alert.error(error);
     //   dispatch(clearErrors());
     // }
+    getMostPopularBooks();
     dispatch(getProduct());
   }, [dispatch]);
 
-  const productList = products?.data?.books || [];
+  // console.log(" API From PYTHON", products?.data?.bookFind);
+
+  const productList = products?.data?.bookFind || products?.data?.books || [];
+
+  console.log("productList", productList);
+  let popularBookList;
+  mostPopularBooks?.bookName.forEach((i) => {
+    popularBookList = productList?.filter((r) => {
+      return r.bookName === i;
+    });
+  });
 
   const slicedList = productList.splice(5, 4);
 
@@ -76,20 +97,11 @@ const Home = () => {
           </div>
 
           {/* <BookButton name="Add to cart" /> */}
-          <Heading heading="Featured " />
-          {/* <div className="container" id="container">
-            {productList &&
-              productList.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))}
-          </div> */}
-
-          {/* <Heading heading="Borrow and Read " /> */}
-          <ProductBlock productList={slicedList} />
+          <Heading heading="Top Rated Books " />
+          <ProductBlock productList={popularBookList} />
 
           <Heading heading="Nepali Books" />
-            <ProductBlock productList={nepaliBookList} />
-            
+          <ProductBlock productList={nepaliBookList} />
 
           <Heading heading="Nepali Books" />
           <ProductBlock productList={nepaliBookList} />

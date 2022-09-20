@@ -42,6 +42,7 @@ export const getProduct =
   };
 /* Get a single product detailed information */
 export const getProductDetails = (idParam) => async (dispatch) => {
+  console.log("idParam +++++++++ ", idParam);
   try {
     dispatch({
       type: PRODUCT_DETAILS_REQUEST,

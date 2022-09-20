@@ -37,9 +37,7 @@ const ProductDetails = () => {
 
   const productData = product?.data?.book;
 
-  const { cartItems } = useSelector((state) => state.productDetails);
-
-  console.log("cartItems", cartItems);
+  console.log("productData", product);
 
   // const { success, error: reviewError } = useSelector(
   //   (state) => state.newReview
@@ -82,7 +80,6 @@ const ProductDetails = () => {
   const addToCartHandler = () => {
     dispatch(addItemsToCart(id, quantity));
     alert.success("Item added to cart");
-    console.log("cartItems ====== ", cartItems);
   };
 
   const reviewSubmitHandler = () => {
@@ -113,7 +110,7 @@ const ProductDetails = () => {
     //     dispatch({ type: NEW_REVIEW_RESET });
     //   }
     dispatch(getProductDetails(id));
-  }, [dispatch, id, error, alert]);
+  }, [dispatch, id]);
 
   return (
     <Fragment>

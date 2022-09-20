@@ -8,13 +8,12 @@ const ProductBlock = ({ productList }) => {
   const handleClick = () => {
     history("/products");
   };
-
   return (
-    <div className="see-all-container">
+    <div className="see-all-container" key={productList?.ISBN}>
       <div className="container" id="container">
         {productList &&
           productList.map((product) => (
-            <ProductCard key={product._id} product={product} />
+            <ProductCard key={product?.ISBN} product={product} />
           ))}
       </div>
       {/* <div>
