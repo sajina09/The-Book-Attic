@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, createProduct } from "../../actions/productAction";
+import { clearErrors, createProduct } from "../../actions/ProductActions";
 import { useAlert } from "react-alert";
 import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
@@ -11,7 +11,7 @@ import StorageIcon from "@material-ui/icons/Storage";
 import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import SideBar from "./Sidebar";
-import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
+import { NEW_PRODUCT_RESET } from "../../constants/ProductConstants";
 
 const NewProduct = ({ history }) => {
   const dispatch = useDispatch();
@@ -28,13 +28,13 @@ const NewProduct = ({ history }) => {
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
-    "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
-    "Camera",
-    "SmartPhones",
+    "Horror",
+    "Adventure",
+    "Romantic",
+    "Comedy",
+    "Novel",
+    "Fiction",
+    "Biography"
   ];
 
   useEffect(() => {

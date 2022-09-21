@@ -7,9 +7,9 @@ import {
   getOrderDetails,
   clearErrors,
   updateOrder,
-} from "../../actions/orderAction";
+} from "../../actions/OrderActions";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from "../layout/Loader/Loader";
+import Loader from "../Loader/Loader";
 import { useAlert } from "react-alert";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import { Button } from "@material-ui/core";

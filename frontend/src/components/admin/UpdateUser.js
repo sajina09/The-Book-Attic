@@ -13,8 +13,7 @@ import {
   updateUser,
   clearErrors,
 } from "../../actions/userAction";
-import Loader from "../layout/Loader/Loader";
-
+import Loader from "../Loader/Loader";
 const UpdateUser = ({ history, match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
