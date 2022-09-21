@@ -14,7 +14,7 @@ const ProductBlock = ({ productList }) => {
       <div className="container" id="container">
         {productList &&
           productList.map((product) => (
-            <ProductCard key={product?.ISBN} product={product} />
+            <ProductCard key={product?._id} product={product} />
           ))}
       </div>
       {/* <div>

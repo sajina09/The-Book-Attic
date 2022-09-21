@@ -7,7 +7,7 @@ const Product = require("../model/productModel");
 /* Get all product / books */
 
 exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
-  const resultPerPage = 5;
+  const resultPerPage = 10;
   const bookCounts = await Book.countDocuments();
 
   const apiFeatures = new ApiFeatures(Book.find(), req.query)
@@ -24,8 +24,6 @@ exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
 
   const test = await Book.find();
 
-  console.log("books", test);
-
   if (!books) {
     return next(
       new ErrorHandler(400, "No books found", "Book finding error", null)
@@ -37,6 +35,7 @@ exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
     message: "Find all books successful",
     error: null,
     data: {
+      books,
       test,
       bookCounts,
       resultPerPage,

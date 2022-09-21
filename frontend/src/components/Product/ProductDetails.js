@@ -37,14 +37,13 @@ const ProductDetails = () => {
 
   const productData = product?.data?.book;
 
-  console.log("productData?.ratings -----,", productData);
   // const { success, error: reviewError } = useSelector(
   //   (state) => state.newReview
   // );
 
   const options = {
     size: "large",
-    value: productData?.ratings,
+    value: 2.8,
     readOnly: true,
     precision: 0.5,
   };
@@ -122,7 +121,7 @@ const ProductDetails = () => {
             <div>
               <img
                 className="CarouselImage"
-                src={productData?.image}
+                src={productData?.image[0].url}
                 alt={`Slide`}
               />
 

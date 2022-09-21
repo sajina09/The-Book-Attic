@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
 import ProductBlock from "./ProductBlock";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { loading, products } = useSelector((state) => state.products);
@@ -50,7 +51,6 @@ const Home = () => {
   const productList = products?.data?.test || [];
   // console.log("productList", products?.data?.test);
 
-  console.log("productList", productList);
   let popularBookList;
   mostPopularBooks?.bookName.forEach((i) => {
     popularBookList = productList?.filter((r) => {
@@ -114,23 +114,23 @@ const Home = () => {
 
           {/* <BookButton name="Add to cart" /> */}
 
-          <Heading heading="Books" />
-          <ProductBlock productList={productList} />
+          {/* <Heading heading="Books" />
+          <ProductBlock productList={productList} /> */}
 
           <Heading heading="Top Rated Books " />
           <ProductBlock productList={popularBookList} />
+          {/* 
+          <Heading heading="Nepali Books" />
+          <ProductBlock productList={nepaliBookList} /> */}
 
           <Heading heading="Nepali Books" />
           <ProductBlock productList={nepaliBookList} />
-
-          <Heading heading="Nepali Books" />
-          <ProductBlock productList={nepaliBookList} />
-
-          <Heading heading="Translated books " />
-          <ProductBlock productList={translatedBookList} />
 
           <Heading heading="Second Hand books " />
           <ProductBlock productList={secondHandBookList} />
+
+          <Heading heading="Translated books " />
+          <ProductBlock productList={translatedBookList} />
         </>
       )}
     </Fragment>

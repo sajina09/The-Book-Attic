@@ -3,15 +3,15 @@ import "./Cart.css";
 import CartItemCard from "./CartItemCard";
 import { useSelector, useDispatch } from "react-redux";
 import { addItemsToCart, removeItemsFromCart } from "../../actions/CartActions";
-// import { Typography } from "@material-ui/core";
-// import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
+import { Typography } from "@material-ui/core";
+import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
-  console.log("cartItems", cartItems);
+
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -41,9 +41,9 @@ const Cart = () => {
     <Fragment>
       {cartItems.length === 0 ? (
         <div className="emptyCart">
-          {/* <RemoveShoppingCartIcon /> */}
+          <RemoveShoppingCartIcon />
           Icon
-          {/* <Typography>No Product in Your Cart</Typography> */}
+          <Typography>No Product in Your Cart</Typography>
           <Link to="/products">View Products</Link>
         </div>
       ) : (

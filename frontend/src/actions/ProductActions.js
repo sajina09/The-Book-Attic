@@ -42,9 +42,7 @@ export const getProduct =
   };
 /* Get a single product detailed information */
 export const getProductDetails = (idParam) => async (dispatch) => {
-  console.log("idParam +++++++++ ", idParam);
   try {
-    console.log("tryyyy");
     dispatch({
       type: PRODUCT_DETAILS_REQUEST,
     });
@@ -55,7 +53,6 @@ export const getProductDetails = (idParam) => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
-    console.log("eroooror");
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
       payload: error.response.data.message,

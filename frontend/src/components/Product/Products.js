@@ -34,13 +34,13 @@ const muiTheme = createTheme({
 });
 
 const categories = [
-  "Horror",
   "Adventure",
-  "Romantic",
-  "Comedy",
-  "Novel",
-  "Fiction",
   "Biography",
+  "Comedy",
+  "Fiction",
+  "Horror",
+  "Productivity",
+  "Romance",
 ];
 
 const Products = ({ match }) => {
@@ -108,7 +108,7 @@ const Products = ({ match }) => {
               />
             </ThemeProvider>
 
-            {/* <Typography>Categories</Typography>  */}
+            <Typography>Categories</Typography>
             <ul className="categoryBox">
               {categories.map((category) => (
                 <li
