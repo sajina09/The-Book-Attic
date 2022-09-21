@@ -44,6 +44,7 @@ export const getProduct =
 export const getProductDetails = (idParam) => async (dispatch) => {
   console.log("idParam +++++++++ ", idParam);
   try {
+    console.log("tryyyy");
     dispatch({
       type: PRODUCT_DETAILS_REQUEST,
     });

@@ -97,7 +97,7 @@ const Products = ({ match }) => {
           </div>
           <div className="filterBox">
             <ThemeProvider theme={muiTheme}>
-              {/* <Typography>Price</Typography> */}
+              <Typography>Price</Typography>
               <Slider
                 value={price}
                 onChange={priceHandler}
@@ -122,8 +122,8 @@ const Products = ({ match }) => {
             </ul>
 
             <fieldset>
-              {/* <Typography component="legend">Ratings Above</Typography> */}
-              {/* <Slider
+              <Typography component="legend">Ratings Above</Typography>
+              <Slider
                 value={ratings}
                 onChange={(e, newRating) => {
                   setRatings(newRating);
@@ -132,7 +132,7 @@ const Products = ({ match }) => {
                 valueLabelDisplay="auto"
                 min={0}
                 max={5}
-              /> */}
+              />
             </fieldset>
           </div>
 

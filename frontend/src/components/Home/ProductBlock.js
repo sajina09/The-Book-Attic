@@ -9,7 +9,7 @@ const ProductBlock = ({ productList }) => {
     history("/products");
   };
   return (
-    <div className="see-all-container" key={productList?.ISBN}>
+    <div className="see-all-container" key={productList?._id}>
       <div className="container" id="container">
         {productList &&
           productList.map((product) => (

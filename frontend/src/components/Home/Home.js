@@ -18,11 +18,21 @@ const Home = () => {
 
   const [mostPopularBooks, setMostPopularBooks] = useState();
 
-  const getMostPopularBooks = async () => {
-    const { data } = await axios.post("http://localhost:8001/upload/");
-    console.log(" API From PYTHON", data);
+  // if (error) {
+  //   alert.error(error);
+  //   dispatch(clearErrors());
+  // }
 
-    setMostPopularBooks(data);
+  const getMostPopularBooks = async () => {
+    const data = await axios
+      .post("http://localhost:8001/upload/")
+      .then(() => {
+        console.log(" API From PYTHON", data);
+        setMostPopularBooks(data);
+      })
+      .catch((error) => {
+        console.log("Error in django", error);
+      });
   };
 
   useEffect(() => {

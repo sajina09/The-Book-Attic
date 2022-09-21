@@ -172,7 +172,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   product.reviews.forEach((r) => {
     avg += r.ratings;
   });
-  product.ratings = avg / product.reviews.length;
+  product.rating = avg / product.reviews.length;
 
   await product.save({ validateBeforeSave: false });
 

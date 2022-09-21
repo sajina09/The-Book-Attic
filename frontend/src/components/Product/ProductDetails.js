@@ -37,8 +37,7 @@ const ProductDetails = () => {
 
   const productData = product?.data?.book;
 
-  console.log("productData", product);
-
+  console.log("productData?.ratings -----,", productData);
   // const { success, error: reviewError } = useSelector(
   //   (state) => state.newReview
   // );
