@@ -44,22 +44,26 @@ const LoginSignUp = (location) => {
 
   const registerSubmit = (e) => {
     e.preventDefault();
-
     const myForm = new FormData();
-
     myForm.set("name", name);
+
     myForm.set("email", email);
+
     myForm.set("password", password);
+
     myForm.set("avatar", avatar);
+
     dispatch(register(myForm));
   };
 
   const registerDataChange = (e) => {
     if (e.target.name === "avatar") {
+
       const reader = new FileReader();
 
       reader.onload = () => {
         if (reader.readyState === 2) {
+
           setAvatarPreview(reader.result);
           setAvatar(reader.result);
         }
@@ -67,12 +71,12 @@ const LoginSignUp = (location) => {
 
       reader.readAsDataURL(e.target.files[0]);
     } else {
+
       setUser({ ...user, [e.target.name]: e.target.value });
     }
   };
 
-  const redirect = location.search ? location.search.split("=")[1]:"/account";
-
+  const redirect = location.search ? location.search.split("=")[1] : "/account";
 
   useEffect(() => {
     if (error) {
