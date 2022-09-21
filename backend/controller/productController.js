@@ -7,7 +7,7 @@ const Product = require("../model/productModel");
 /* Get all product / books */
 
 exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
-  const resultPerPage = 20;
+  const resultPerPage = 5;
   const bookCounts = await Book.countDocuments();
 
   const apiFeatures = new ApiFeatures(Book.find(), req.query)
@@ -18,7 +18,9 @@ exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
   let books = await apiFeatures.query;
   let filteredProductsCount = books.length;
   apiFeatures.pagination(resultPerPage);
-  // books = await apiFeatures.query;
+
+  // console.log("Books ", books);
+  // console.log("BookFind", bookFind);
 
   const test = await Book.find();
 
@@ -173,7 +175,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   product.reviews.forEach((r) => {
     avg += r.ratings;
   });
-  product.ratings = avg / product.reviews.length;
+  product.rating = avg / product.reviews.length;
 
   await product.save({ validateBeforeSave: false });
 

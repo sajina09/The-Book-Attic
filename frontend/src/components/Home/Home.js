@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { CgMouse } from "react-icons/cg";
 import Heading from "../Heading";
 import "./Home.css";
@@ -9,8 +9,6 @@ import { clearErrors, getProduct } from "../../actions/ProductActions";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
 import ProductBlock from "./ProductBlock";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
 
 const Home = () => {
@@ -19,15 +17,25 @@ const Home = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
 
-  const [mostPopularBooks, setMostPopularBooks] = useState([]);
+  const [mostPopularBooks, setMostPopularBooks] = useState();
+
+  // if (error) {
+  //   alert.error(error);
+  //   dispatch(clearErrors());
+  // }
 
   const getMostPopularBooks = async () => {
-    console.log(" API From PYTHON", products);
-
-    const { data } = await axios.post("http://localhost:8001/upload/");
-
-    setMostPopularBooks(data);
+    const data = await axios
+      .post("http://localhost:8001/upload/")
+      .then(() => {
+        console.log(" API From PYTHON", data);
+        setMostPopularBooks(data);
+      })
+      .catch((error) => {
+        console.log("Error in RS", error);
+      });
   };
+
   useEffect(() => {
     // if (error) {
     //   alert.error(error);
@@ -41,6 +49,14 @@ const Home = () => {
 
   const productList = products?.data?.test || [];
   // console.log("productList", products?.data?.test);
+
+  console.log("productList", productList);
+  let popularBookList;
+  mostPopularBooks?.bookName.forEach((i) => {
+    popularBookList = productList?.filter((r) => {
+      return r.bookName === i;
+    });
+  });
 
   const slicedList = productList.splice(5, 4);
 
@@ -57,20 +73,19 @@ const Home = () => {
     return item.isSecondHand === true;
   });
 
-  let productListArray = [];
-  productList?.map((list) => {
-    return {
-      name: list.bookName,
-      // images: list.image,
-      images: [
-        {
-          url: "https://play-lh.googleusercontent.com/r-ZtHr0NkeGRLkFWcDVsLLpabGsO52PJfRM7cVIjfCP8tudJawUZ60iPXp_lhUCaeyid",
-        },
-      ],
-      price: "Rs." + list.price,
-      _id: list._id,
-    };
-  });
+  // productList?.map((list) => {
+  //   return {
+  //     name: list.bookName,
+  //     // images: list.image,
+  //     images: [
+  //       {
+  //         url: "https://play-lh.googleusercontent.com/r-ZtHr0NkeGRLkFWcDVsLLpabGsO52PJfRM7cVIjfCP8tudJawUZ60iPXp_lhUCaeyid",
+  //       },
+  //     ],
+  //     price: "Rs." + list.price,
+  //     _id: list._id,
+  //   };
+  // });
 
   const toCart = () => {
     history("/cart");
@@ -97,8 +112,13 @@ const Home = () => {
           </div>
           <button onClick={toCart}>Cart</button>
 
-          {/* <Heading heading="Most Popular " /> */}
-          {/* <ProductBlock productList={mostPopularBooks} /> */}
+          {/* <BookButton name="Add to cart" /> */}
+
+          <Heading heading="Books" />
+          <ProductBlock productList={productList} />
+
+          <Heading heading="Top Rated Books " />
+          <ProductBlock productList={popularBookList} />
 
           <Heading heading="Nepali Books" />
           <ProductBlock productList={nepaliBookList} />

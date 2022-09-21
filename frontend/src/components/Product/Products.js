@@ -55,7 +55,7 @@ const Products = ({ match }) => {
   const [ratings, setRatings] = useState(0);
   const { products, loading, error } = useSelector((state) => state.products);
 
-  const books = products?.data?.books;
+  const books = products?.data?.bookFind || products?.data?.books;
   const resultPerPage = products?.data?.resultPerPage;
   const productsCount = products?.data?.bookCounts;
   const filteredProductsCount = products?.data?.filteredProductsCount;
@@ -97,15 +97,15 @@ const Products = ({ match }) => {
           </div>
           <div className="filterBox">
             <ThemeProvider theme={muiTheme}>
-            {/* <Typography>Price</Typography> */}
-            <Slider
-              value={price}
-              onChange={priceHandler}
-              valueLabelDisplay="auto"
-              aria-labelledby="range-slider"
-              min={0}
-              max={5000}
-            />
+              <Typography>Price</Typography>
+              <Slider
+                value={price}
+                onChange={priceHandler}
+                valueLabelDisplay="auto"
+                aria-labelledby="range-slider"
+                min={0}
+                max={5000}
+              />
             </ThemeProvider>
 
             {/* <Typography>Categories</Typography>  */}
@@ -122,8 +122,8 @@ const Products = ({ match }) => {
             </ul>
 
             <fieldset>
-              {/* <Typography component="legend">Ratings Above</Typography> */}
-              {/* <Slider
+              <Typography component="legend">Ratings Above</Typography>
+              <Slider
                 value={ratings}
                 onChange={(e, newRating) => {
                   setRatings(newRating);
@@ -132,7 +132,7 @@ const Products = ({ match }) => {
                 valueLabelDisplay="auto"
                 min={0}
                 max={5}
-              /> */}
+              />
             </fieldset>
           </div>
 
