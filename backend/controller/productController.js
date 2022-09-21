@@ -7,7 +7,7 @@ const Product = require("../model/productModel");
 /* Get all product / books */
 
 exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
-  const resultPerPage = 20;
+  const resultPerPage = 5;
   const bookCounts = await Book.countDocuments();
 
   const apiFeatures = new ApiFeatures(Book.find(), req.query)
@@ -18,9 +18,9 @@ exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
   let books = await apiFeatures.query;
   let filteredProductsCount = books.length;
   apiFeatures.pagination(resultPerPage);
-  // books = await apiFeatures.query;
 
-  let bookFind = await Book.find();
+  // console.log("Books ", books);
+  // console.log("BookFind", bookFind);
 
   if (!books) {
     return next(
@@ -34,7 +34,6 @@ exports.getAllBooks = catchAsyncErrors(async (req, res, next) => {
     error: null,
     data: {
       books,
-      bookFind,
       bookCounts,
       resultPerPage,
       filteredProductsCount,

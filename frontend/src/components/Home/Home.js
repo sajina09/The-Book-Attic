@@ -31,7 +31,7 @@ const Home = () => {
         setMostPopularBooks(data);
       })
       .catch((error) => {
-        console.log("Error in django", error);
+        console.log("Error in RS", error);
       });
   };
 
@@ -44,9 +44,7 @@ const Home = () => {
     dispatch(getProduct());
   }, [dispatch]);
 
-  // console.log(" API From PYTHON", products?.data?.bookFind);
-
-  const productList = products?.data?.bookFind || products?.data?.books || [];
+  const productList = products?.data?.books || [];
 
   console.log("productList", productList);
   let popularBookList;
@@ -71,20 +69,19 @@ const Home = () => {
     return item.isSecondHand === true;
   });
 
-  let productListArray = [];
-  productList?.map((list) => {
-    return {
-      name: list.bookName,
-      // images: list.image,
-      images: [
-        {
-          url: "https://play-lh.googleusercontent.com/r-ZtHr0NkeGRLkFWcDVsLLpabGsO52PJfRM7cVIjfCP8tudJawUZ60iPXp_lhUCaeyid",
-        },
-      ],
-      price: "Rs." + list.price,
-      _id: list._id,
-    };
-  });
+  // productList?.map((list) => {
+  //   return {
+  //     name: list.bookName,
+  //     // images: list.image,
+  //     images: [
+  //       {
+  //         url: "https://play-lh.googleusercontent.com/r-ZtHr0NkeGRLkFWcDVsLLpabGsO52PJfRM7cVIjfCP8tudJawUZ60iPXp_lhUCaeyid",
+  //       },
+  //     ],
+  //     price: "Rs." + list.price,
+  //     _id: list._id,
+  //   };
+  // });
 
   return (
     <Fragment>
@@ -107,6 +104,10 @@ const Home = () => {
           </div>
 
           {/* <BookButton name="Add to cart" /> */}
+
+          <Heading heading="Books" />
+          <ProductBlock productList={productList} />
+
           <Heading heading="Top Rated Books " />
           <ProductBlock productList={popularBookList} />
 
