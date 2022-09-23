@@ -28,9 +28,9 @@ const Home = () => {
   const getMostPopularBooks = async () => {
     const data = await axios
       .post("http://localhost:8001/upload/")
-      .then(() => {
-        console.log(" API From PYTHON", data);
-        setMostPopularBooks(data);
+      .then((res) => {
+        setMostPopularBooks(res?.data?.bookName);
+        console.log(" Popular Books From PYTHON ----- ", res?.data?.bookName);
       })
       .catch((error) => {
         console.log("Error in RS", error);
@@ -42,17 +42,16 @@ const Home = () => {
     //   alert.error(error);
     //   dispatch(clearErrors());
     // }
+
     getMostPopularBooks();
     dispatch(getProduct());
   }, [dispatch]);
-
-  console.log(" API From PYTHON", mostPopularBooks);
 
   const productList = products?.data?.test || [];
   // console.log("productList", products?.data?.test);
 
   let popularBookList;
-  mostPopularBooks?.bookName.forEach((i) => {
+  mostPopularBooks?.bookName?.forEach((i) => {
     popularBookList = productList?.filter((r) => {
       return r.bookName === i;
     });
@@ -64,14 +63,17 @@ const Home = () => {
   const nepaliBookList = productList?.filter((item) => {
     return item.language === "Nepali";
   });
+  const slicedListNepali = nepaliBookList.splice(1, 4);
 
   const translatedBookList = productList?.filter((item) => {
     return item.isTranslatedBook === true;
   });
+  const slicedListTranslated = nepaliBookList.splice(1, 4);
 
   const secondHandBookList = productList?.filter((item) => {
     return item.isSecondHand === true;
   });
+  const slicedListSecondHand = secondHandBookList.splice(1, 4);
 
   // productList?.map((list) => {
   //   return {
@@ -111,26 +113,35 @@ const Home = () => {
             </a>
           </div>
           <button onClick={toCart}>Cart</button>
-
           {/* <BookButton name="Add to cart" /> */}
+          <Heading heading="Books" />
+          {productList.length > 1 ? (
+            <>
+              <ProductBlock productList={productList} />
+              <Heading heading="Top Rated Books " />{" "}
+            </>
+          ) : (
+            ""
+          )}
 
-          {/* <Heading heading="Books" />
-          <ProductBlock productList={productList} /> */}
+          {/* <ProductBlock productList={slicedList} /> */}
 
-          <Heading heading="Top Rated Books " />
-          <ProductBlock productList={popularBookList} />
-          {/* 
-          <Heading heading="Nepali Books" />
-          <ProductBlock productList={nepaliBookList} /> */}
+          {slicedListNepali.length > 0 && (
+            <>
+              <Heading heading="Second Hand books " />
+              <ProductBlock productList={slicedListNepali} />
+            </>
+          )}
 
-          <Heading heading="Nepali Books" />
-          <ProductBlock productList={nepaliBookList} />
-
-          <Heading heading="Second Hand books " />
-          <ProductBlock productList={secondHandBookList} />
-
-          <Heading heading="Translated books " />
-          <ProductBlock productList={translatedBookList} />
+          {slicedListTranslated.length > 0 && (
+            <>
+              {" "}
+              <Heading heading="Translated books " />
+              <ProductBlock productList={slicedListTranslated} />
+            </>
+          )}
+          {/* <Heading heading="Nepali Books" />
+          <ProductBlock productList={slicedListNepali} /> */}
         </>
       )}
     </Fragment>

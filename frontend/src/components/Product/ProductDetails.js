@@ -31,7 +31,7 @@ const ProductDetails = () => {
   const alert = useAlert();
   const { id } = useParams();
 
-  const { product, loading, error } = useSelector(
+  const { product, loading, error, test } = useSelector(
     (state) => state.productDetails
   );
 

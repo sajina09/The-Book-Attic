@@ -5,7 +5,7 @@ import { saveShippingInfo } from "../../actions/CartActions";
 import MetaData from "../layout/MetaData";
 import PinDropIcon from "@material-ui/icons/PinDrop";
 import HomeIcon from "@material-ui/icons/Home";
-import LocationCityIcon from "@material-ui/icons/LocationCity";
+ import LocationCityIcon from "@material-ui/icons/LocationCity";
 import PublicIcon from "@material-ui/icons/Public";
 import PhoneIcon from "@material-ui/icons/Phone";
 import TransferWithinAStationIcon from "@material-ui/icons/TransferWithinAStation";
