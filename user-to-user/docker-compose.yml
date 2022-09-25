@@ -1,0 +1,17 @@
+version: "3"
+services:
+  user-recommend-server:
+    build:
+      context: .
+    image: user-recommend-server
+    ports:
+      - 8003:8000  
+    volumes:
+      - .:/collab-recommend-django
+    command: python manage.py runserver 0.0.0.0:8000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  user-recommend-django:
+

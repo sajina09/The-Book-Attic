@@ -1,2 +1,2 @@
-db_host="mongodb://192.168.16.173"
-db_port=27018
+db_host="127.0.0.1"
+db_port=27017

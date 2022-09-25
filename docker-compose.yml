@@ -5,21 +5,46 @@ services:
       context: ./collaborative_api
     image: collab-recommend-server
     ports:
-      - "8000:8000"
+      - 9002:8000  
+    expose:
+      - 8000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - .:/collab-recommend-django
     command: python manage.py runserver 0.0.0.0:8000
+    
 
   popular-recommend-server:
     build:
       context: ./popular_api/
     image: popular-recommend-server
     ports:
-      - "8001:8000"
+      - 9001:8000
+    expose:
+      - 8000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - .:/popular-recommend-django
     command: python manage.py runserver 0.0.0.0:8000
 
+  user-user-server:
+    build:
+      context: ./user-to-user/
+    image: user-to-user
+    ports:
+    - 9003:8000
+    expose:
+    - 8000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - .:/user-to-user
+    command: python manage.py runserver 0.0.0.0:8000
+
+
 volumes:
   collab-recommend-django:
   popular-recommend-django:
+  user-to-user:
