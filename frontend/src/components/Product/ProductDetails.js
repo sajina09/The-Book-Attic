@@ -25,6 +25,9 @@ import Rating from "@mui/material/Rating";
 
 import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import BookButton from "../Button";
+import Heading from "../Heading";
+import ProductBlock from "../Home/ProductBlock";
+import axios from "axios";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -40,17 +43,47 @@ const ProductDetails = () => {
   // const { success, error: reviewError } = useSelector(
   //   (state) => state.newReview
   // );
+  console.log("product?.ratings", product);
 
   const options = {
     size: "large",
-    value: 2.8,
+    value: product?.data?.book?.ratings || 0,
     readOnly: true,
     precision: 0.5,
+  };
+  const [similarBooks, setSimilarBooks] = useState([]);
+  const [recommendedBooks, setRecomendedBooks] = useState([]);
+
+  const getMostSimilarBooks = async () => {
+    const data = await axios
+      .post("http://localhost:8002/upload/")
+      .then((res) => {
+        setSimilarBooks(res?.data?.bookName);
+        console.log(" Similar Books From PYTHON ----- ", res?.data?.bookName);
+      })
+      .catch((error) => {
+        console.log("Error in RS", error);
+      });
+  };
+
+  const getRecommendedBooks = async () => {
+    const data = await axios
+      .post("http://localhost:8003/upload/")
+      .then((res) => {
+        setSimilarBooks(res?.data?.bookName);
+        console.log(
+          " Recommended Books From PYTHON ----- ",
+          res?.data?.bookName
+        );
+      })
+      .catch((error) => {
+        console.log("Error in RS", error);
+      });
   };
 
   const [quantity, setQuantity] = useState(1);
   const [open, setOpen] = useState(false);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(Number(0));
   const [comment, setComment] = useState("");
   const increaseQuantity = () => {
     if (product.stock <= quantity) return;
@@ -88,8 +121,9 @@ const ProductDetails = () => {
     myForm.set("productId", id);
 
     dispatch(newReview(myForm));
-
     setOpen(false);
+    // window.location.reload();
+    alert.success("Review Submitted");
   };
 
   useEffect(() => {
@@ -197,7 +231,7 @@ const ProductDetails = () => {
             <DialogContent className="submitDialog">
               <Rating
                 onChange={(e) => setRating(e.target.value)}
-                value={rating}
+                value={Number(rating)}
                 size="large"
               />
               <textarea
@@ -226,6 +260,22 @@ const ProductDetails = () => {
             </div>
           ) : (
             <p className="noReviews">No Reviews Yet</p>
+          )}
+          {similarBooks?.length > 0 && (
+            <>
+              <Heading heading="Similar Books for you" />
+              <div className="reviews">
+                <ProductBlock productList={[]} />
+              </div>
+            </>
+          )}
+          {recommendedBooks?.length > 0 && (
+            <>
+              <Heading heading="Recommended for you" />
+              <div className="reviews">
+                <ProductBlock productList={[]} />
+              </div>
+            </>
           )}
         </Fragment>
       )}

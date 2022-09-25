@@ -11,6 +11,7 @@ import Loader from "../Loader/Loader";
 import ProductBlock from "./ProductBlock";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import OurServices from "./OurServices";
 
 const Home = () => {
   const { loading, products } = useSelector((state) => state.products);
@@ -27,10 +28,10 @@ const Home = () => {
 
   const getMostPopularBooks = async () => {
     const data = await axios
-      .post("http://localhost:8001/upload/")
+      .post("http://localhost:9001/upload/")
       .then((res) => {
         setMostPopularBooks(res?.data?.bookName);
-        console.log(" Popular Books From PYTHON ----- ", res?.data?.bookName);
+        console.log(" Popular Books From PYTHON ----- ", res?.data);
       })
       .catch((error) => {
         console.log("Error in RS", error);
@@ -105,15 +106,18 @@ const Home = () => {
               <img src={logo} alt="Logo" />
             </div>
             <p>Welcome to The Book Attic</p>
-            <h1>FIND AMAZING PRODUCTS BELOW</h1>
+            <h1>FIND AMAZING BOOKS BELOW</h1>
             <a href="#container">
               <button>
                 Scroll <CgMouse />
               </button>
             </a>
           </div>
-          <button onClick={toCart}>Cart</button>
+          {/* <button onClick={toCart}>Cart</button> */}
           {/* <BookButton name="Add to cart" /> */}
+
+          <OurServices />
+
           <Heading heading="Books" />
           {productList.length > 1 ? (
             <>

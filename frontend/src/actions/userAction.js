@@ -40,6 +40,7 @@ import axios from "axios";
 
 export const login = (email, password) => async (dispatch) => {
   try {
+    console.log("Login Try");
     dispatch({ type: LOGIN_REQUEST });
 
     const config = { headers: { "Content-Type": "application/json" } };
@@ -51,6 +52,7 @@ export const login = (email, password) => async (dispatch) => {
     );
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
+    console.log("Login catch", error.response.data.message);
     dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
   }
 };
@@ -58,15 +60,17 @@ export const login = (email, password) => async (dispatch) => {
 // Register
 export const register = (userData) => async (dispatch) => {
   try {
+    console.log("Register Try");
+
     dispatch({ type: REGISTER_USER_REQUEST });
 
     const config = { headers: { "Content-Type": "multipart/form-data" } };
 
     const { data } = await axios.post(`/api/v1/register`, userData, config);
 
-
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
   } catch (error) {
+    console.log("Register error");
 
     dispatch({
       type: REGISTER_USER_FAIL,

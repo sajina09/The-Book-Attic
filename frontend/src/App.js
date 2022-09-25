@@ -22,7 +22,7 @@ import ResetPassword from "./components/User/ResetPassword";
 import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
-import OrderSucess from "./components/Cart/OrderSuccess";
+import OrderSuccess from "./components/Cart/OrderSuccess";
 import MyOrders from "./components/Order/MyOrders";
 import OrderDetails from "./components/Order/OrderDetails";
 import Dashboard from "./components/Admin/Dashboard";
@@ -39,9 +39,8 @@ import ProductReviews from "./components/Admin/ProductReviews";
 // import NotFound from "./component/layout/NotFound/NotFound";
 
 function App() {
-  const { isAuthenticatedUser, user } = useSelector((state) => state.user);
-  const { state } = useSelector((state) => state.user);
-  console.log("state", state);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+
   useEffect(() => {
     WebFont.load({
       google: {
@@ -51,22 +50,20 @@ function App() {
     store.dispatch(loadUser);
   }, []);
 
-  console.log("isAuthenticatedUser", isAuthenticatedUser);
+  console.log("isAuthenticatedUser", isAuthenticated);
   return (
     <>
-      {isAuthenticatedUser && <UserOptions user={user} />}
       <Router>
+        {isAuthenticated && <UserOptions user={user} />}
+
         <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/products" element={<Products />} />
           <Route path="/product/:id" element={<DetailsPage />} />
           <Route path="/products/:keyword" element={<Products />} />
-
           <Route exact path="/search" element={<Search />} />
-          {/* <ProtectedRoute exact path="/account" component={Profile} /> */}
-
-          {/* <Route exact path="/account" element={<Profile />} /> */}
+          <Route exact path="/account" element={<Profile />} />
           <Route exact path="/me/update" element={<UpdateProfile />} />
           <Route exact path="/password/update" element={<UpdatePassword />} />
           <Route exact path="/password/forgot" element={<ForgotPassword />} />
@@ -75,18 +72,14 @@ function App() {
             path="/password/reset/:token"
             element={<ResetPassword />}
           />
-
           <Route exact path="/login" element={<LoginSignUp />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/shipping" element={<Shipping />} />
-
           {/* <Route exact path="/khalti/payment" element={<Khalti/>} /> */}
-          <Route exact path="/success" element={<OrderSucess />} />
+          <Route exact path="/success" element={<OrderSuccess />} />
           <Route exact path="/orders" element={<MyOrders />} />
-
           <Route exact path="/order/confirm" element={<ConfirmOrder />} />
           <Route exact path="/orders/:id" element={<OrderDetails />} />
-
           <Route
             isAdmin={true}
             exact
@@ -105,7 +98,6 @@ function App() {
             isAdmin={true}
             element={<NewProduct />}
           />
-
           <Route
             exact
             path="/admin/product/:id"
@@ -118,7 +110,6 @@ function App() {
             isAdmin={true}
             element={<OrderList />}
           />
-
           <Route
             exact
             path="/admin/order/:id"
@@ -131,21 +122,18 @@ function App() {
             isAdmin={true}
             element={<UsersList />}
           />
-
           <Route
             exact
             path="/admin/user/:id"
             isAdmin={true}
             element={<UpdateUser />}
           />
-
           <Route
             exact
             path="/admin/reviews"
             isAdmin={true}
             element={<ProductReviews />}
           />
-
           {/* <Route
           component={
             window.location.pathname === "/process/payment" ? null : NotFound

@@ -13,6 +13,8 @@ const ProductCard = ({ product }) => {
     isHalf: true,
   };
 
+  console.log("product?.ratings", product?.ratings);
+
   const isTranslatedBook = product?.isTranslatedBook;
 
   const productID = product?._id;

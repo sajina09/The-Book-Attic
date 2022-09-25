@@ -16,6 +16,7 @@ const UserOptions = ({ user }) => {
   const { cartItems } = useSelector((state) => state.cart);
 
   const [open, setOpen] = useState(false);
+
   const history = useNavigate();
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -44,25 +45,26 @@ const UserOptions = ({ user }) => {
   }
 
   function dashboard() {
-    history.push("/admin/dashboard");
+    history("/admin/dashboard");
   }
 
   function orders() {
-    history.push("/orders");
+    history("/orders");
   }
   function account() {
-    history.push("/account");
+    history("/account");
   }
   function cart() {
-    history.push("/cart");
+    history("/cart");
   }
   function logoutUser() {
     dispatch(logout());
     alert.success("Logout Successfully");
+    history("/login");
   }
 
   return (
-    <Fragment>
+    <>
       <Backdrop open={open} style={{ zIndex: "10" }} />
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
@@ -80,7 +82,7 @@ const UserOptions = ({ user }) => {
           />
         }
       >
-        {options.map((item) => (
+        {options?.map((item) => (
           <SpeedDialAction
             key={item.name}
             icon={item.icon}
@@ -90,7 +92,7 @@ const UserOptions = ({ user }) => {
           />
         ))}
       </SpeedDial>
-    </Fragment>
+    </>
   );
 };
 

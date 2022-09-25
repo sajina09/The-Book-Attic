@@ -1,0 +1,13 @@
+.service-container {
+  margin: 20px;
+  width: 93vw;
+  height: 60vh;
+  background-color: rgb(236, 242, 242);
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
